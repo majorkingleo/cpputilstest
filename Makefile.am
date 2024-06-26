@@ -77,7 +77,6 @@ cpputils_cpputilsshared_libcpputilsshared_a_SOURCES= \
 		cpputils/cpputilsshared/leoini.cc \
 		cpputils/cpputilsshared/map_utils.h \
 		cpputils/cpputilsshared/pairs.h \
-		cpputils/cpputilsshared/pairs.cc \
 		cpputils/cpputilsshared/range.h \
 		cpputils/cpputilsshared/ref.h \
 		cpputils/cpputilsshared/stderr_exception.h \
