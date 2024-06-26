@@ -3,7 +3,8 @@ bin_PROGRAMS=\
 	test_format11 \
 	test_format98 \
 	test_wformat \
-	test_cpputilsshared
+	test_cpputilsshared \
+	test_io
 	
 test_format_SOURCES=\
 		src_test_format/test_format.cc \
@@ -35,6 +36,11 @@ test_cpputilsshared_SOURCES=\
 		src_test_cpputilsshared/test_static_string.cc \
 		tools_config.h
 		
+test_io_SOURCES=\
+		src_test_io/test_io.cc \
+		src_test_io/test_read_file.cc \
+		src_test_io/test_read_file.h \
+		tools_config.h		
 
 AM_CPPFLAGS = -I$(top_srcdir)/tools \
 	-I$(top_srcdir)/cpputils/cpputilsshared  \
@@ -132,6 +138,11 @@ test_wformat_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a 
 	cpputils/cpputilsshared/libcpputilsshared.a
 
 test_cpputilsshared_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a \
+	cpputils/io/libcpputilsio.a \
+	cpputils/cpputilsshared/libcpputilsshared.a \
+	common/libcommon.a
+	
+test_io_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a \
 	cpputils/io/libcpputilsio.a \
 	cpputils/cpputilsshared/libcpputilsshared.a \
 	common/libcommon.a
