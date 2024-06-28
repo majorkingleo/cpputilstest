@@ -104,7 +104,10 @@ cmake_install.cmake
 dist
 mymoc.sh
 
-test_format
-test_format11
-test_format98
-test_wformat
+test_format*
+test_format11*
+test_format98*
+test_wformat*
+test_io*
+test_cpputilsshared*
+

@@ -76,16 +76,52 @@ public:
 #endif
 
 namespace {
+
+class SystemInfo
+{
+public:
+	enum class NativEncoding
+	{
+		UTF16LE,
+		UTF32LE,
+	};
+
+	NativEncoding encoding;
+
+public:
+
+	SystemInfo()
+	{
+		CPPDEBUG( format( "sizeof(wchar_t): %d", sizeof(wchar_t) ) );
+
+		if( sizeof(wchar_t) == sizeof(uint16_t) ) {
+			encoding = NativEncoding::UTF16LE;
+		}
+		else if( sizeof(wchar_t) == sizeof(uint32_t) ) {
+			encoding = NativEncoding::UTF32LE;
+		}
+
+		static_assert( sizeof(wchar_t) == sizeof(uint16_t) || sizeof(wchar_t) == sizeof(uint32_t) );
+	}
+};
+
+SystemInfo SYSTEM_INFO;
+
 class TestReadFile : public TestCaseBase<bool>
 {
 	const std::string testcase_directory;
+	std::string expected_file_name;
 
 public:
 	TestReadFile( unsigned test_number )
 	: TestCaseBase<bool>( format( "read_file%02d", test_number ), true ),
-	testcase_directory( format( "testdata/read_file%02d", test_number ) )
+	testcase_directory( format( "src_test_io/testdata/read_file%02d", test_number ) )
 	{
-
+		switch( SYSTEM_INFO.encoding )
+		{
+		case SystemInfo::NativEncoding::UTF16LE: expected_file_name = "expected-utf16le.txt"; break;
+		case SystemInfo::NativEncoding::UTF32LE: expected_file_name = "expected-utf32le.txt"; break;
+		}
 	}
 
 	std::shared_ptr<std::vector<char>> read_file_bin( const std::string & file_name )
@@ -103,7 +139,7 @@ public:
 		ReadFile rf;
 
 		const std::string in_file = CppDir::concat_dir( testcase_directory, "in.txt" );
-		const std::string expected_file = CppDir::concat_dir( testcase_directory, "expected.txt" );
+		const std::string expected_file = CppDir::concat_dir( testcase_directory, expected_file_name );
 		const std::string expected_encoding_file = CppDir::concat_dir( testcase_directory, "encoding.txt" );
 
 		std::wstring content;
