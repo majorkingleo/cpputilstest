@@ -10,4 +10,7 @@
 
 
 std::shared_ptr<TestCaseBase<bool>> test_case_read_file1();
+std::shared_ptr<TestCaseBase<bool>> test_case_read_file2();
+std::shared_ptr<TestCaseBase<bool>> test_case_read_file3();
+
 

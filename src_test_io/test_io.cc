@@ -60,6 +60,8 @@ int main( int argc, char **argv )
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
 
 		test_cases.push_back( test_case_read_file1() );
+		test_cases.push_back( test_case_read_file2() );
+		test_cases.push_back( test_case_read_file3() );
 
 		ColBuilder col;
 

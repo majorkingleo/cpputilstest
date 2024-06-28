@@ -185,4 +185,13 @@ std::shared_ptr<TestCaseBase<bool>> test_case_read_file1()
 	return std::make_shared<TestReadFile>(1);
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_read_file2()
+{
+	return std::make_shared<TestReadFile>(2);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_read_file3()
+{
+	return std::make_shared<TestReadFile>(3);
+}
 
