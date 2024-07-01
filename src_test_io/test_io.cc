@@ -62,6 +62,8 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_read_file1() );
 		test_cases.push_back( test_case_read_file2() );
 		test_cases.push_back( test_case_read_file3() );
+		test_cases.push_back( test_case_read_file4() );
+		test_cases.push_back( test_case_read_file5() );
 
 		ColBuilder col;
 

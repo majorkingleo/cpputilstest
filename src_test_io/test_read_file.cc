@@ -17,6 +17,8 @@
 #include <fstream>
 #include <read_file.h>
 #include <string.h>
+#include <set>
+#include <utf8.h>
 
 using namespace Tools;
 
@@ -105,7 +107,7 @@ public:
 	}
 };
 
-SystemInfo SYSTEM_INFO;
+static SystemInfo SYSTEM_INFO;
 
 class TestReadFile : public TestCaseBase<bool>
 {
@@ -156,9 +158,11 @@ public:
 			throw STDERR_EXCEPTION( format( "cannot open file: '%s'", expected_encoding_file ));
 		}
 
-		encoding = strip( encoding );
+		auto vs = split_and_strip_simple( encoding );
+		std::set<std::string> sencodings( vs.begin(), vs.end() );
 
-		if( encoding != rf.getFileEncoding() ) {
+
+		if( sencodings.count( rf.getFileEncoding() ) == 0 ) {
 			CPPDEBUG( format( "file encoding: '%s' expected encoding: '%s'", rf.getFileEncoding(), encoding ) );
 			return false;
 		}
@@ -170,8 +174,27 @@ public:
 			return false;
 		}
 
-		if( memcmp( data_expected->data(), content.c_str(), content_size ) != 0 ) {
-			CPPDEBUG( "data differs" );
+		{
+			const char16_t *u16data = reinterpret_cast<const char16_t*>(data_expected->data());
+			std::u16string su16data( u16data );
+
+			CPPDEBUG( wformat( L"check: %d", utf8::is_valid(su16data.begin(), su16data.end()) ) );
+		}
+
+		if( int n = memcmp( data_expected->data(), content.c_str(), content_size ); n != 0 ) {
+
+			const wchar_t *wdata = reinterpret_cast<const wchar_t*>(data_expected->data());
+
+			CPPDEBUG( wformat( L"expected: '%s'", wdata ) );
+			CPPDEBUG( wformat( L"got:      '%s'", content ) );
+
+			for( unsigned i = 0; i < content_size; i++ ) {
+				if( content[i] != wdata[i] ) {
+					CPPDEBUG( format( "diff[%d]: 0x%X != 0x%X ", i, static_cast<unsigned>(content[i]), static_cast<unsigned>(wdata[i]) ) );
+				}
+			}
+
+			CPPDEBUG( format( "data differs: %d", n ) );
 			return false;
 		}
 
@@ -193,5 +216,15 @@ std::shared_ptr<TestCaseBase<bool>> test_case_read_file2()
 std::shared_ptr<TestCaseBase<bool>> test_case_read_file3()
 {
 	return std::make_shared<TestReadFile>(3);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_read_file4()
+{
+	return std::make_shared<TestReadFile>(4);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_read_file5()
+{
+	return std::make_shared<TestReadFile>(5);
 }
 
