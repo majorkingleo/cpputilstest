@@ -262,6 +262,8 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_modify_static_string1() );
 		test_cases.push_back( test_case_modify_static_string2() );
 		test_cases.push_back( test_case_modify_static_string3() );
+		test_cases.push_back( test_case_modify_static_string4() );
+		test_cases.push_back( test_case_modify_static_string5() );
 
 		ColBuilder col;
 

@@ -126,3 +126,27 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string3()
 						}, v );
 			});
 }
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string4()
+{
+	return std::make_shared<TestEqualToString<20,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string("XXX");
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string5()
+{
+	return std::make_shared<TestEqualToString<20,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string("01234567890123");
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
