@@ -145,7 +145,43 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string5()
 			[]( auto & v ) {
 				std::visit(
 						[](auto & e){
-							e = std::string("01234567890123");
+							e = std::string("01234567890123456789");
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string6()
+{
+	return std::make_shared<TestEqualToString<30,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string("012345678901234567890123456789");
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string7()
+{
+	return std::make_shared<TestEqualToString<40,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string("0123456789012345678901234567890123456789");
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string8()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string("01234567890123456789012345678901234567890123456789");
 							CPPDEBUG( format( "string: %s", e ) );
 						}, v );
 			});

@@ -14,6 +14,9 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string2();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string3();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string4();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string5();
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string6();
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string7();
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string8();
 
 
 #endif /* SRC_TEST_CPPUTILSSHARED_TEST_STATIC_VECTOR_H_ */

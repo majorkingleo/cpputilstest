@@ -19,6 +19,8 @@ using namespace Tools;
 
 int main( int argc, char **argv )
 {
+	//std::cout << std::string('0', 20 ) << std::endl;
+
 	ColoredOutput co;
 
 	Arg::Arg arg( argc, argv );
@@ -264,6 +266,9 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_modify_static_string3() );
 		test_cases.push_back( test_case_modify_static_string4() );
 		test_cases.push_back( test_case_modify_static_string5() );
+		test_cases.push_back( test_case_modify_static_string6() );
+		test_cases.push_back( test_case_modify_static_string7() );
+		test_cases.push_back( test_case_modify_static_string8() );
 
 		ColBuilder col;
 
