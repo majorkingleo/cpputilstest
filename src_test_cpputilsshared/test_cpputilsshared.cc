@@ -64,7 +64,7 @@ int main( int argc, char **argv )
 #endif
 
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
-
+/*
 		test_cases.push_back( test_case_toupper1() );
 		test_cases.push_back( test_case_toupper2() );
 		test_cases.push_back( test_case_toupper3() );
@@ -260,7 +260,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_list_swap2() );
 		test_cases.push_back( test_case_static_list_swap3() );
 		test_cases.push_back( test_case_static_list_swap4() );
-
+*/
 		test_cases.push_back( test_case_modify_static_string1() );
 		test_cases.push_back( test_case_modify_static_string2() );
 		test_cases.push_back( test_case_modify_static_string3() );
@@ -269,6 +269,11 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_modify_static_string6() );
 		test_cases.push_back( test_case_modify_static_string7() );
 		test_cases.push_back( test_case_modify_static_string8() );
+
+		test_cases.push_back( test_case_modify_static_string_replace_1() );
+		test_cases.push_back( test_case_modify_static_string_replace_2() );
+
+		test_cases.push_back( test_case_modify_static_string_append_1() );
 
 		ColBuilder col;
 

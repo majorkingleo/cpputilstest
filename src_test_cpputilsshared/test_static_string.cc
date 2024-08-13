@@ -38,7 +38,7 @@ namespace std {
 template <std::size_t N, class T>
 std::ostream & operator<<( std::ostream & out, const static_basic_string<N,T> & cstring )
 {
-	out << "[" << cstring.size() << "]";
+	out << "[" << cstring.size() << "," << cstring.max_size() << "]";
 
 	out << "{";
 
@@ -182,6 +182,45 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string8()
 				std::visit(
 						[](auto & e){
 							e = std::string("01234567890123456789012345678901234567890123456789");
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string("'%s'");
+							e.replace( 1, 2, "hello" );
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_2()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string("'hello'");
+							e.replace( 1, 5, "%s" );
+							CPPDEBUG( format( "string: %s", e ) );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.append("1").append(std::string("2")).append(std::string_view("3")).append({'4'});
 							CPPDEBUG( format( "string: %s", e ) );
 						}, v );
 			});
