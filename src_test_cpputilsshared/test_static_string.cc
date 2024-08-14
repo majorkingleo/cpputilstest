@@ -9,7 +9,7 @@
 #include <variant>
 #include <CpputilsDebug.h>
 #include <format.h>
-
+#include <sstream>
 
 using namespace Tools;
 
@@ -34,6 +34,7 @@ bool operator==( const static_basic_string<N,T> & c, const std::basic_string<T> 
 
 } // namespace
 
+#if 0
 namespace std {
 template <std::size_t N, class T>
 std::ostream & operator<<( std::ostream & out, const static_basic_string<N,T> & cstring )
@@ -48,9 +49,8 @@ std::ostream & operator<<( std::ostream & out, const static_basic_string<N,T> & 
 
 	return out;
 }
-
-
 } // namespace std
+#endif
 
 namespace {
 
@@ -80,6 +80,53 @@ struct TestEqualToString : public TestCaseBase<bool>
         func( cv );
 
         return std::get<0>(cc) == std::get<1>(cv);
+    }
+};
+
+
+struct TestBool : public TestCaseBase<bool>
+{
+	typedef std::function<bool()> Func;
+	Func func;
+
+    TestBool( const std::string & descr, Func func )
+	: TestCaseBase<bool>( descr, true, false ),
+	  func( func )
+	{}
+
+    bool run() override
+    {
+        return func();
+    }
+};
+
+
+template <std::size_t N,class T>
+struct TestEqualConv : public TestCaseBase<bool>
+{
+	using CONTAINER = std::variant<static_basic_string<N,T>,std::basic_string<T>>;
+	typedef std::function<std::string(CONTAINER&)> Func;
+	Func func;
+
+	static_basic_string<N,T> c;
+    std::basic_string<T>   v;
+
+    TestEqualConv( const std::string & descr, Func func )
+	: TestCaseBase<bool>( descr, true, false ),
+	  func( func ),
+	  c(),
+	  v()
+	{}
+
+    bool run() override
+    {
+    	CONTAINER cc = c;
+    	CONTAINER cv = v;
+
+        auto res_cc = func( cc );
+        auto res_cv = func( cv );
+
+        return res_cc == res_cv;
     }
 };
 
@@ -223,5 +270,143 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1()
 							e.append("1").append(std::string("2")).append(std::string_view("3")).append({'4'});
 							CPPDEBUG( format( "string: %s", e ) );
 						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a == b) && ( b == a );
+				 };
+
+				 return cmp( std::string("a"), static_string<20>("a") ) &&
+						cmp( std::string_view("a"), static_string<20>("a") ) &&
+						cmp( "a", static_string<20>("a") ) &&
+						cmp( static_string<15>("a"), static_string<20>("a") );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a == b) && ( b == a );
+				 };
+
+				 return !cmp( std::string("a"), static_string<20>("ab") ) &&
+						!cmp( std::string_view("a"), static_string<20>("ab") ) &&
+						!cmp( "a", static_string<20>("ab") ) &&
+						!cmp( static_string<15>("a"), static_string<20>("ab") );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a != b) && ( b != a );
+				 };
+
+				 return cmp( std::string("a"), static_string<20>("ab") ) &&
+						cmp( std::string_view("a"), static_string<20>("ab") ) &&
+						cmp( "a", static_string<20>("ab") ) &&
+						cmp( static_string<15>("a"), static_string<20>("ab") );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_4()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a != b) && ( b != a );
+				 };
+
+				 return !cmp( std::string("a"), static_string<20>("a") ) &&
+						!cmp( std::string_view("a"), static_string<20>("a") ) &&
+						!cmp( "a", static_string<20>("a") ) &&
+						!cmp( static_string<15>("a"), static_string<20>("a") );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_5()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a == b) && ( b == a );
+				 };
+
+				 return !cmp( "0123456789", static_string<5>("01234") );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_6()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a < b) && ( b > a );
+				 };
+
+				 return cmp( "aaa", static_string<10>("bbb") ) &&
+						cmp( std::string_view("aaa"), static_string<5>("bbb") ) &&
+						cmp( std::string("aaa"), static_string<5>("bbb") ) &&
+						cmp( static_string<10>("aaa"), static_string<5>("bbb") ) &&
+						cmp( static_string<10>("aaa"), static_string<10>("bb") );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_7()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a <= b) && ( b > a );
+				 };
+
+				 return cmp( "aaa", static_string<10>("bbb") ) &&
+						cmp( std::string_view("aaa"), static_string<5>("bbb") ) &&
+						cmp( std::string("aaa"), static_string<5>("bbb") ) &&
+						cmp( static_string<10>("aaa"), static_string<5>("bbb") ) &&
+						cmp( static_string<10>("aaa"), static_string<10>("bb") );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_8()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & a, const auto & b ) {
+					 return ( a >= b) && ( b < a );
+				 };
+
+				 return !cmp( "aaa", static_string<10>("bbb") ) &&
+						!cmp( std::string_view("aaa"), static_string<5>("bbb") ) &&
+						!cmp( std::string("aaa"), static_string<5>("bbb") ) &&
+						!cmp( static_string<10>("aaa"), static_string<5>("bbb") ) &&
+						!cmp( static_string<10>("aaa"), static_string<10>("bb") );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_ostream_1()
+{
+	return std::make_shared<TestEqualConv<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::stringstream str;
+
+				std::visit(
+						[&str](auto & e){
+							e = "hello";
+							str << e;
+						}, v );
+
+				return str.str();
 			});
 }

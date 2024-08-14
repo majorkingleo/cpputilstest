@@ -23,8 +23,18 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_2();
 
 
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1();
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_2();
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_3();
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_4();
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_3();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_4();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_5();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_6();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_7();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_8();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_ostream_1();
 
 #endif /* SRC_TEST_CPPUTILSSHARED_TEST_STATIC_VECTOR_H_ */
