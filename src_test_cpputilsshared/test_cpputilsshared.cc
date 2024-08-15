@@ -287,6 +287,21 @@ int main( int argc, char **argv )
 
 		test_cases.push_back( test_case_static_string_ostream_1() );
 
+		test_cases.push_back( test_case_static_string_constructor_1() );
+		test_cases.push_back( test_case_static_string_constructor_2() );
+
+		test_cases.push_back( test_case_static_string_capacity_1() );
+
+		test_cases.push_back( test_case_static_string_max_size_1() );
+
+		test_cases.push_back( test_case_static_string_reserve_1() );
+		test_cases.push_back( test_case_static_string_reserve_2() );
+
+		test_cases.push_back( test_case_static_string_resize_1() );
+		test_cases.push_back( test_case_static_string_resize_2() );
+		test_cases.push_back( test_case_static_string_resize_3() );
+
+
 		ColBuilder col;
 
 		const int COL_IDX 		= col.addCol( "Idx" );

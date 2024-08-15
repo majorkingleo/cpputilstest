@@ -89,8 +89,8 @@ struct TestBool : public TestCaseBase<bool>
 	typedef std::function<bool()> Func;
 	Func func;
 
-    TestBool( const std::string & descr, Func func )
-	: TestCaseBase<bool>( descr, true, false ),
+    TestBool( const std::string & descr, Func func, bool throws_exception = false )
+	: TestCaseBase<bool>( descr, true, throws_exception ),
 	  func( func )
 	{}
 
@@ -131,6 +131,143 @@ struct TestEqualConv : public TestCaseBase<bool>
 };
 
 } // namespace
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_constructor_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp = []( const auto & text ) {
+					 return ( std::string(text) == static_string<20>(text) );
+				 };
+
+				 return cmp( "aaa" ) &&
+						cmp( std::string_view("aaa") ) &&
+						cmp( std::string("aaa") ) &&
+						cmp( std::initializer_list({ 'a', 'b', 'c' }) );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_constructor_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 std::string_view sv = "hello";
+				 auto it_a = sv.begin();
+				 it_a++;
+
+				 auto it_b = sv.end();
+				 it_b--;
+
+				 return ( static_string<20>( static_string<20>("aaa") ) == std::string( std::string("aaa") ) ) &&
+						( static_string<20>( 10, 'A' ) == std::string( 10, 'A' ) ) &&
+						( static_string<20>( "A", 10 ) == std::string( "A" ,10 ) ) &&
+						( static_string<20>( sv.begin(), sv.end() ) == std::string( sv.begin(), sv.end() ) ) &&
+						( static_string<20>( it_a, it_b ) == std::string( it_a, it_b ) ) &&
+						( static_string<20>( sv, 1, 10 ) == std::string( sv, 1, 10 ) );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_capacity_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 return ( static_string<20>().capacity() == 20 ) &&
+						( static_string<10>().capacity() == 10 );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_max_size_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 return ( static_string<20>().max_size() == 20 ) &&
+						( static_string<10>().max_size() == 10 );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_reserve_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+
+				auto a = static_basic_string<20,char,static_string_out_of_range_cut>();
+				a.reserve(40);
+
+				return a.max_size() == 20;
+
+			}, false);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_reserve_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+
+				auto a = static_basic_string<20,char,static_string_out_of_range_except>();
+				a.reserve(40);
+
+				return a.max_size() == 20;
+
+			}, true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+
+				auto a = static_basic_string<20,char,static_string_out_of_range_except>();
+				a.resize(40);
+
+				return a.max_size() == 20;
+
+			}, true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+
+				auto a = static_basic_string<20,char,static_string_out_of_range_cut>();
+				a.resize(40);
+
+				return a.max_size() == 20;
+
+			}, false);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+			[]() {
+				 auto cmp1 = []( const char* text, std::size_t n ) {
+					 std::string a( text );
+					 a.resize( n );
+
+					 static_string<20> b( text );
+					 b.resize( n );
+
+					 return a == b;
+				 };
+
+				 auto cmp2 = []( const char* text, std::size_t n, char ch ) {
+					 std::string a( text );
+					 a.resize( n, ch );
+
+					 static_string<20> b( text );
+					 b.resize( n, ch );
+
+					 return a == b;
+				 };
+
+				 return ( cmp1( "hello", 3 ) ) &&
+						( cmp1( "hello", 0 ) ) &&
+						( cmp2( "hello", 10, 'x' ) );
+			});
+}
+
 
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string1()
 {

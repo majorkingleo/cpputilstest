@@ -9,6 +9,20 @@
 #include <TestUtils.h>
 #include <memory>
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_constructor_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_constructor_2();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_capacity_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_max_size_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_reserve_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_reserve_2();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_3();
+
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string1();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string2();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string3();
