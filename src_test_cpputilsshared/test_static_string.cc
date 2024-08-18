@@ -398,6 +398,106 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_2()
 			});
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 return ( std::strcmp( static_string<20>().c_str(), std::string().c_str() ) == 0 ) &&
+							( std::strcmp( static_string<20>("hello").c_str(), std::string("hello").c_str() ) == 0 );
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 static_string<20> x;
+					 static_string<20> y("y");
+
+					 x = y;
+					 return x == y;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_2()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_3()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = 'h';
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_4()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = { 'h', 'e', 'l', 'l', 'o' };
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_5()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string_view( "hello" );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_6()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string( "hello" );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_7()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 static_basic_string<20,char> x;
+					 static_basic_string<30,char> y("y");
+
+					 x = y;
+					 return x == y;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_8()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 static_string<20> x;
+					 static_string<30> y("y");
+
+					 x = y;
+					 return x == y;
+				});
+}
+
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1()
 {
 	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,

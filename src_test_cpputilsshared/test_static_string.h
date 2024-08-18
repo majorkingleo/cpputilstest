@@ -23,6 +23,17 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_2();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_resize_3();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_3();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_4();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_5();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_6();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_7();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_8();
+
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string1();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string2();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string3();

@@ -301,6 +301,17 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_resize_2() );
 		test_cases.push_back( test_case_static_string_resize_3() );
 
+		test_cases.push_back( test_case_static_string_c_str_1() );
+
+		test_cases.push_back( test_case_static_string_operator_assign_1() );
+		test_cases.push_back( test_case_static_string_operator_assign_2() );
+		test_cases.push_back( test_case_static_string_operator_assign_3() );
+		test_cases.push_back( test_case_static_string_operator_assign_4() );
+		test_cases.push_back( test_case_static_string_operator_assign_5() );
+		test_cases.push_back( test_case_static_string_operator_assign_6() );
+		test_cases.push_back( test_case_static_string_operator_assign_7() );
+		test_cases.push_back( test_case_static_string_operator_assign_8() );
+
 
 		ColBuilder col;
 
