@@ -312,6 +312,12 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_operator_assign_7() );
 		test_cases.push_back( test_case_static_string_operator_assign_8() );
 
+#if __cpp_lib_string_contains >= 202011L
+		test_cases.push_back( test_case_static_string_contains_1() );
+#endif
+
+		test_cases.push_back( test_case_static_string_substr_1() );
+		test_cases.push_back( test_case_static_string_substr_2() );
 
 		ColBuilder col;
 

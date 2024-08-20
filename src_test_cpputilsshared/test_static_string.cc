@@ -510,6 +510,45 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1()
 			});
 }
 
+#if __cpp_lib_string_contains >= 202011L
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 auto contains = []( const auto & str) {
+						return str.contains( "hello" );
+					 };
+
+					 const char *text = "text hello text";
+					 return contains( static_string<20>( text ) ) == contains( std::string( text ) );
+				});
+}
+#endif
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_substr_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e = e.substr( 2 );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_substr_2()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e = e.substr( 2, 2 );
+						}, v );
+			});
+}
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,

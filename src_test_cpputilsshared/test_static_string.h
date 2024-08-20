@@ -49,6 +49,12 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_2();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1();
 
+#if __cpp_lib_string_contains >= 202011L
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
+#endif
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_substr_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_substr_2();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_2();
