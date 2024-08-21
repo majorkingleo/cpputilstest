@@ -70,6 +70,18 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1();
 
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_3();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_4();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_5();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_6();
+#else
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_7();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_8();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_9();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_10();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_11();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_12();
 #endif
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_substr_1();

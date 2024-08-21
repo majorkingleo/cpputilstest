@@ -728,6 +728,126 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1()
 					 return contains( static_string<20>( text ) ) == contains( std::string( text ) );
 				});
 }
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 auto contains = []( const auto & str) {
+						return str.contains( 'e' );
+					 };
+
+					 const char *text = "text hello text";
+					 return contains( static_string<20>( text ) ) == contains( std::string( text ) );
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 auto contains = []( const auto & str) {
+						return str.contains( std::string_view( "hello" ) );
+					 };
+
+					 const char *text = "text hello text";
+					 return contains( static_string<20>( text ) ) == contains( std::string( text ) );
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_4()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 auto contains = []( const auto & str) {
+						return str.contains( "xxx" );
+					 };
+
+					 const char *text = "text hello text";
+					 return contains( static_string<20>( text ) ) == contains( std::string( text ) );
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_5()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 auto contains = []( const auto & str) {
+						return str.contains( 'y' );
+					 };
+
+					 const char *text = "text hello text";
+					 return contains( static_string<20>( text ) ) == contains( std::string( text ) );
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_6()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 auto contains = []( const auto & str) {
+						return str.contains( std::string_view( "xxx" ) );
+					 };
+
+					 const char *text = "text hello text";
+					 return contains( static_string<20>( text ) ) == contains( std::string( text ) );
+				});
+}
+#else
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_7()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "text hello text";
+					 return static_string<20>( text ).contains("hello");
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_8()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "text hello text";
+					 return static_string<20>( text ).contains('e');
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_9()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "text hello text";
+					 return static_string<20>( text ).contains( std::string_view( "hello" ) );
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_10()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "text hello text";
+					 return !static_string<20>( text ).contains("xxx");
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_11()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "text hello text";
+					 return !static_string<20>( text ).contains('y');
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_12()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "text hello text";
+					 return !static_string<20>( text ).contains( std::string_view( "xxx" ) );
+				});
+}
+
 #endif
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_substr_1()

@@ -332,6 +332,18 @@ int main( int argc, char **argv )
 
 #if __cpp_lib_string_contains >= 202011L
 		test_cases.push_back( test_case_static_string_contains_1() );
+		test_cases.push_back( test_case_static_string_contains_2() );
+		test_cases.push_back( test_case_static_string_contains_3() );
+		test_cases.push_back( test_case_static_string_contains_4() );
+		test_cases.push_back( test_case_static_string_contains_5() );
+		test_cases.push_back( test_case_static_string_contains_6() );
+#else
+		test_cases.push_back( test_case_static_string_contains_7() );
+		test_cases.push_back( test_case_static_string_contains_8() );
+		test_cases.push_back( test_case_static_string_contains_9() );
+		test_cases.push_back( test_case_static_string_contains_10() );
+		test_cases.push_back( test_case_static_string_contains_11() );
+		test_cases.push_back( test_case_static_string_contains_12() );
 #endif
 
 		test_cases.push_back( test_case_static_string_substr_1() );
