@@ -64,7 +64,7 @@ int main( int argc, char **argv )
 #endif
 
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
-/*
+
 		test_cases.push_back( test_case_toupper1() );
 		test_cases.push_back( test_case_toupper2() );
 		test_cases.push_back( test_case_toupper3() );
@@ -260,7 +260,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_list_swap2() );
 		test_cases.push_back( test_case_static_list_swap3() );
 		test_cases.push_back( test_case_static_list_swap4() );
-*/
+
 		test_cases.push_back( test_case_modify_static_string1() );
 		test_cases.push_back( test_case_modify_static_string2() );
 		test_cases.push_back( test_case_modify_static_string3() );
@@ -319,11 +319,15 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_assign_3() );
 		test_cases.push_back( test_case_static_string_assign_4() );
 		test_cases.push_back( test_case_static_string_assign_5() );
+
 		test_cases.push_back( test_case_static_string_assign_6() );
 		test_cases.push_back( test_case_static_string_assign_7() );
+
 		test_cases.push_back( test_case_static_string_assign_8() );
 		test_cases.push_back( test_case_static_string_assign_9() );
+
 		test_cases.push_back( test_case_static_string_assign_10() );
+
 		test_cases.push_back( test_case_static_string_assign_11() );
 		test_cases.push_back( test_case_static_string_assign_12() );
 		test_cases.push_back( test_case_static_string_assign_13() );

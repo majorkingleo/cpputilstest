@@ -79,7 +79,17 @@ struct TestEqualToString : public TestCaseBase<bool>
         func( cc );
         func( cv );
 
-        return std::get<0>(cc) == std::get<1>(cv);
+        if( !(std::get<0>(cc) == std::get<1>(cv)) ) {
+        	CPPDEBUG( format( "FAILED: '%s' {%d}(static_basic_string<%d>) != '%s' {%d}(basic_string)",
+        			std::get<0>(cc),
+					std::get<0>(cc).size(),
+					N,
+					std::get<1>(cv),
+					std::get<1>(cv).size() ) );
+        	return false;
+        }
+
+        return true;
     }
 };
 
@@ -585,8 +595,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_6()
 					 std::string stdy(testtext);
 					 stdx.assign(stdy,5);
 
-
-					 return sx == stdy;
+					 return sx == stdx;
 				});
 }
 
@@ -606,7 +615,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_7()
 					 stdx.assign(stdy,2);
 
 
-					 return sx == stdy;
+					 return sx == stdx;
 				});
 }
 
