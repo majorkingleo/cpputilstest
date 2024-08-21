@@ -52,6 +52,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_13();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_14();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_15();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_15();
+
 
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string1();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string2();
@@ -66,7 +68,14 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_2();
 
 
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_at_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_at_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_at_3();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_3();
+
 
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();

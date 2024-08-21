@@ -273,7 +273,14 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_modify_static_string_replace_1() );
 		test_cases.push_back( test_case_modify_static_string_replace_2() );
 
-		test_cases.push_back( test_case_modify_static_string_append_1() );
+		test_cases.push_back( test_case_static_string_at_1() );
+		test_cases.push_back( test_case_static_string_at_2() );
+		test_cases.push_back( test_case_static_string_at_3() );
+
+		test_cases.push_back( test_case_static_string_operator_at_1() );
+		test_cases.push_back( test_case_static_string_operator_at_2() );
+		test_cases.push_back( test_case_static_string_operator_at_3() );
+
 
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );

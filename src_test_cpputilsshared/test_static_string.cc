@@ -408,6 +408,72 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_2()
 			});
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_at_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "'hello'";
+							e.at(3) = 'x';
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_at_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "hello";
+					 return std::string(text).at(2) == static_string<20>(text).at(2);
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_at_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "hello";
+					 const static_string<20> x(text);
+					 return x.at(strlen(text)) == 'x';
+				}, true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "'hello'";
+							e[3] = 'x';
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "hello";
+					 return std::string(text)[2] == static_string<20>(text)[2];
+				});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char *text = "hello";
+					 const std::string s1(text);
+					 const static_string<20> s2(text);
+					 return  s1[2] == s2[2];
+				});
+}
+
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,
