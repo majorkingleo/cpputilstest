@@ -34,6 +34,25 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_6();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_7();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_8();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_to_basic_string_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_3();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_4();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_5();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_6();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_7();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_8();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_9();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_10();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_11();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_12();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_13();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_14();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_15();
+
+
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string1();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string2();
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string3();

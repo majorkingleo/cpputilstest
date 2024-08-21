@@ -498,6 +498,211 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_assign_8()
 				});
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_to_basic_string_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string x;
+					 static_string<30> y("y");
+
+					 x = y;
+					 return x == y;
+				});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign(5,'y');
+						}, v );
+			});
+}
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 static_string<20> x;
+					 static_string<20> y("y");
+
+					 x.assign(y);
+					 return x == y;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 static_basic_string<20,char> x;
+					 static_basic_string<30,char> y("y");
+
+					 x.assign(y);
+					 return x == y;
+				});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_4()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign( std::string("hello" ) );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_5()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = std::string_view( "hello" );
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_6()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char* testtext = "firstsecond";
+
+					 static_basic_string<20,char> sx;
+					 static_basic_string<30,char> sy(testtext);
+					 sx.assign(sy,5);
+
+					 std::string stdx;
+					 std::string stdy(testtext);
+					 stdx.assign(stdy,5);
+
+
+					 return sx == stdy;
+				});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_7()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 const char* testtext = "firstsecond";
+
+					 static_basic_string<20,char> sx;
+					 static_basic_string<30,char> sy(testtext);
+					 sx.assign(sy,2);
+
+					 std::string stdx;
+					 std::string stdy(testtext);
+					 stdx.assign(stdy,2);
+
+
+					 return sx == stdy;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_8()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign(std::string( "firstsecond" ),5);
+						}, v );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_9()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign(std::string( "firstsecond" ),5,2);
+						}, v );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_10()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign(std::string_view( "firstsecond" ),5,2);
+						}, v );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_11()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign(std::string_view( "firstsecond" ),5);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_12()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign( "firstsecond" ,5);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_13()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign( "firstsecond" );
+						}, v );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_14()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e.assign( { 'H', 'e', 'l', 'l', 'o' });
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_assign_15()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							std::string str("hello");
+							e.assign(str.begin(), str.end());
+						}, v );
+			});
+}
+
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1()
 {
 	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,

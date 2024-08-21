@@ -312,6 +312,24 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_operator_assign_7() );
 		test_cases.push_back( test_case_static_string_operator_assign_8() );
 
+		test_cases.push_back( test_case_static_string_operator_to_basic_string_1() );
+
+		test_cases.push_back( test_case_static_string_assign_1() );
+		test_cases.push_back( test_case_static_string_assign_2() );
+		test_cases.push_back( test_case_static_string_assign_3() );
+		test_cases.push_back( test_case_static_string_assign_4() );
+		test_cases.push_back( test_case_static_string_assign_5() );
+		test_cases.push_back( test_case_static_string_assign_6() );
+		test_cases.push_back( test_case_static_string_assign_7() );
+		test_cases.push_back( test_case_static_string_assign_8() );
+		test_cases.push_back( test_case_static_string_assign_9() );
+		test_cases.push_back( test_case_static_string_assign_10() );
+		test_cases.push_back( test_case_static_string_assign_11() );
+		test_cases.push_back( test_case_static_string_assign_12() );
+		test_cases.push_back( test_case_static_string_assign_13() );
+		test_cases.push_back( test_case_static_string_assign_14() );
+		test_cases.push_back( test_case_static_string_assign_15() );
+
 #if __cpp_lib_string_contains >= 202011L
 		test_cases.push_back( test_case_static_string_contains_1() );
 #endif
