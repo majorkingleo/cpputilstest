@@ -76,6 +76,41 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_2();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_at_3();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_front_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_front_2();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_back_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_back_2();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_string_view_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_iterator_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_iterator_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_iterator_3();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_iterator_4();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_empty_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_size_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_length_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_shrink_to_fit_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_clear_1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_3();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_4();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_41();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_42();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_5();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_51();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_52();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_6();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_7();
+
 
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();

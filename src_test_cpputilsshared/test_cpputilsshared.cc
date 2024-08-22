@@ -281,6 +281,41 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_operator_at_2() );
 		test_cases.push_back( test_case_static_string_operator_at_3() );
 
+		test_cases.push_back( test_case_static_string_front_1() );
+		test_cases.push_back( test_case_static_string_front_2() );
+
+		test_cases.push_back( test_case_static_string_back_1() );
+		test_cases.push_back( test_case_static_string_back_2() );
+
+		test_cases.push_back( test_case_static_string_operator_string_view_1() );
+
+		test_cases.push_back( test_case_static_string_iterator_1() );
+		test_cases.push_back( test_case_static_string_iterator_2() );
+		test_cases.push_back( test_case_static_string_iterator_3() );
+		test_cases.push_back( test_case_static_string_iterator_4() );
+
+		test_cases.push_back( test_case_static_string_empty_1() );
+
+		test_cases.push_back( test_case_static_string_size_1() );
+
+		test_cases.push_back( test_case_static_string_length_1() );
+
+		test_cases.push_back( test_case_static_string_shrink_to_fit_1() );
+
+		test_cases.push_back( test_case_static_string_clear_1() );
+
+		test_cases.push_back( test_case_static_string_insert_1() );
+		test_cases.push_back( test_case_static_string_insert_2() );
+
+		test_cases.push_back( test_case_static_string_insert_3() );
+
+		test_cases.push_back( test_case_static_string_insert_4() );
+		test_cases.push_back( test_case_static_string_insert_41() );
+		test_cases.push_back( test_case_static_string_insert_42() );
+		test_cases.push_back( test_case_static_string_insert_5() );
+
+		test_cases.push_back( test_case_static_string_insert_51() );
+		test_cases.push_back( test_case_static_string_insert_52() );
 
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );
