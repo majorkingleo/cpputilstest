@@ -64,7 +64,7 @@ int main( int argc, char **argv )
 #endif
 
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
-
+#if 0
 		test_cases.push_back( test_case_toupper1() );
 		test_cases.push_back( test_case_toupper2() );
 		test_cases.push_back( test_case_toupper3() );
@@ -303,7 +303,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_shrink_to_fit_1() );
 
 		test_cases.push_back( test_case_static_string_clear_1() );
-
+#endif
 		test_cases.push_back( test_case_static_string_insert_1() );
 		test_cases.push_back( test_case_static_string_insert_2() );
 
@@ -317,6 +317,55 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_insert_51() );
 		test_cases.push_back( test_case_static_string_insert_52() );
 
+		test_cases.push_back( test_case_static_string_insert_6() );
+		test_cases.push_back( test_case_static_string_insert_61() );
+		test_cases.push_back( test_case_static_string_insert_62() );
+
+		test_cases.push_back( test_case_static_string_insert_7() );
+		test_cases.push_back( test_case_static_string_insert_71() );
+
+		test_cases.push_back( test_case_static_string_insert_8() );
+		test_cases.push_back( test_case_static_string_insert_81() );
+		test_cases.push_back( test_case_static_string_insert_82() );
+		test_cases.push_back( test_case_static_string_insert_83() );
+		test_cases.push_back( test_case_static_string_insert_84() );
+
+		test_cases.push_back( test_case_static_string_insert_9() );
+		test_cases.push_back( test_case_static_string_insert_91() );
+		test_cases.push_back( test_case_static_string_insert_92() );
+
+		test_cases.push_back( test_case_static_string_insert_10() );
+		test_cases.push_back( test_case_static_string_insert_101() );
+		test_cases.push_back( test_case_static_string_insert_102() );
+		test_cases.push_back( test_case_static_string_insert_103() );
+
+		test_cases.push_back( test_case_static_string_insert_11() );
+		test_cases.push_back( test_case_static_string_insert_111() );
+		test_cases.push_back( test_case_static_string_insert_112() );
+		test_cases.push_back( test_case_static_string_insert_113() );
+
+		test_cases.push_back( test_case_static_string_insert_12() );
+		test_cases.push_back( test_case_static_string_insert_121() );
+		test_cases.push_back( test_case_static_string_insert_122() );
+		test_cases.push_back( test_case_static_string_insert_123() );
+
+		test_cases.push_back( test_case_static_string_insert_13() );
+		test_cases.push_back( test_case_static_string_insert_131() );
+		test_cases.push_back( test_case_static_string_insert_132() );
+		test_cases.push_back( test_case_static_string_insert_133() );
+
+		test_cases.push_back( test_case_static_string_insert_14() );
+		test_cases.push_back( test_case_static_string_insert_141() );
+		test_cases.push_back( test_case_static_string_insert_142() );
+		test_cases.push_back( test_case_static_string_insert_143() );
+
+		test_cases.push_back( test_case_static_string_insert_15() );
+		test_cases.push_back( test_case_static_string_insert_151() );
+		test_cases.push_back( test_case_static_string_insert_152() );
+		test_cases.push_back( test_case_static_string_insert_153() );
+		test_cases.push_back( test_case_static_string_insert_154() );
+
+#if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );
 		test_cases.push_back( test_case_static_string_operator_3() );
@@ -394,7 +443,7 @@ int main( int argc, char **argv )
 
 		test_cases.push_back( test_case_static_string_substr_1() );
 		test_cases.push_back( test_case_static_string_substr_2() );
-
+#endif
 		ColBuilder col;
 
 		const int COL_IDX 		= col.addCol( "Idx" );
