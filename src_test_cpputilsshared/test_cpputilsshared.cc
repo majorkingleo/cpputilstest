@@ -303,7 +303,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_shrink_to_fit_1() );
 
 		test_cases.push_back( test_case_static_string_clear_1() );
-#endif
+
 		test_cases.push_back( test_case_static_string_insert_1() );
 		test_cases.push_back( test_case_static_string_insert_2() );
 
@@ -364,6 +364,28 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_insert_152() );
 		test_cases.push_back( test_case_static_string_insert_153() );
 		test_cases.push_back( test_case_static_string_insert_154() );
+#endif
+		test_cases.push_back( test_case_static_string_erase_11() );
+		test_cases.push_back( test_case_static_string_erase_12() );
+		test_cases.push_back( test_case_static_string_erase_13() );
+
+		test_cases.push_back( test_case_static_string_erase_21() );
+		test_cases.push_back( test_case_static_string_erase_22() );
+		test_cases.push_back( test_case_static_string_erase_23() );
+
+		test_cases.push_back( test_case_static_string_erase_31() );
+		test_cases.push_back( test_case_static_string_erase_32() );
+		test_cases.push_back( test_case_static_string_erase_33() );
+
+		test_cases.push_back( test_case_static_string_push_back_1() );
+		test_cases.push_back( test_case_static_string_push_back_2() );
+		test_cases.push_back( test_case_static_string_push_back_3() );
+
+		test_cases.push_back( test_case_static_string_pop_back_1() );
+
+		test_cases.push_back( test_case_static_string_append_11() );
+		test_cases.push_back( test_case_static_string_append_12() );
+		test_cases.push_back( test_case_static_string_append_13() );
 
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );

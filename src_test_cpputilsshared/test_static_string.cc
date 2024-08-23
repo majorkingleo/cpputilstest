@@ -2214,8 +2214,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_154()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( format( "s2 (static_string): '%s'", s2 ) );
+				 CPPDEBUG( format( "s1 (std::string)  : '%s'", s1 ) );
 				 return false;
 			 };
 
@@ -2223,6 +2223,232 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_154()
 	});
 }
 
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_11()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.erase(e.begin());
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_12()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.erase(e.cbegin());
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_13()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string   s1 = "hello";
+					 static_string<20> s2 = s1;
+
+					 auto it_s1 = s1.erase(++s1.cbegin());
+					 auto it_s2 = s2.erase(++s2.cbegin());
+
+					 return *it_s1 == *it_s2;
+				});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_21()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.erase();
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_22()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.erase(1);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_23()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.erase(2,2);
+						}, v );
+			});
+}
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_31()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.erase(e.begin(),e.end());
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_32()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.erase(++e.begin(),e.end());
+						}, v );
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_erase_33()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							auto it1 = e.begin();
+							++it1;
+							++it1;
+
+							auto it2 = it1;
+							++it2;
+							++it2;
+
+							e.erase(it1,it2);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_push_back_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.push_back('1');
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_push_back_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<5,char,static_string_out_of_range_cut> s2 = s1;
+
+					 s1.push_back('x');
+					 s2.push_back('x');
+
+					 s1.resize(5);
+
+					 return s1 == s2;
+				});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_push_back_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<5,char,static_string_out_of_range_except> s2 = s1;
+
+					 s1.push_back('x');
+					 s2.push_back('x');
+
+					 s1.resize(5);
+
+					 return s1 == s2;
+				}, true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_pop_back_1()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.pop_back();
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_11()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.append(std::string("30"));
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_12()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+
+					 s1.append(std::string("1234567"));
+					 s2.append(std::string("1234677"));
+
+					 s1.resize(7);
+
+					 CPPDEBUG( format( "s2 (static_string): '%s'", s2 ) );
+					 CPPDEBUG( format( "s1 (std::string)  : '%s'", s1 ) );
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_13()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+
+					 s1.append(std::string("1234567"));
+					 s2.append(std::string("1234677"));
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
