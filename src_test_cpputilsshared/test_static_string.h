@@ -169,6 +169,9 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_11();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_12();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_13();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_21();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_22();
+
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_2();

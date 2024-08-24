@@ -2450,6 +2450,32 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_13()
 				},true);
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_21()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.append(1,'x');
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_22()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.append(0,'x');
+						}, v );
+			});
+}
+
+// xxxx todooooo here
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,

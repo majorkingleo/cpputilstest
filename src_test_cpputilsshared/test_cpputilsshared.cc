@@ -387,6 +387,9 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_append_12() );
 		test_cases.push_back( test_case_static_string_append_13() );
 
+		test_cases.push_back( test_case_static_string_append_21() );
+		test_cases.push_back( test_case_static_string_append_22() );
+
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );
