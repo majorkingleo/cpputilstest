@@ -3293,6 +3293,805 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_63()
 }
 
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_11()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,std::string("Xx"));
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_12()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1.replace(1,2,text);
+					 s2.replace(1,2,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_13()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1.replace(1,2,text);
+					 s2.replace(1,2,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_21()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,std::string_view("Xx"));
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_22()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1.replace(1,2,text);
+					 s2.replace(1,2,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_23()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1.replace(1,2,text);
+					 s2.replace(1,2,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_31()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,static_string<10>("Xx"));
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_32()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 static_string<10> text = "1234567";
+
+					 s1.replace(1,2,text);
+					 s2.replace(1,2,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_33()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 static_string<10> text = "1234567";
+
+					 s1.replace(1,2,text);
+					 s2.replace(1,2,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_41()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							auto it_first = e.begin();
+							++it_first;
+							auto it_last = it_first;
+							++it_last;
+
+							e.replace(it_first,it_last,static_string<10>("Xx"));
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_42()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 static_string<10> text = "1234567";
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,text);
+					 s2.replace(s2_it_first,s2_it_last,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_43()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+	[]() {
+		 std::string s1 = "hello";
+		 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+		 static_string<10> text = "1234567";
+
+		 auto s1_it_first = s1.begin();
+		 ++s1_it_first;
+		 auto s1_it_last = s1_it_first;
+		 ++s1_it_last;
+
+		 auto s2_it_first = s2.begin();
+		 ++s2_it_first;
+		 auto s2_it_last = s2_it_first;
+		 ++s2_it_last;
+
+		 s1.replace(s1_it_first,s1_it_last,text);
+		 s2.replace(s2_it_first,s2_it_last,text);
+
+		 s1.resize(7);
+
+		 return s1 == s2;
+	},true);
+}
+
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_51()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							auto it_first = e.begin();
+							++it_first;
+							auto it_last = it_first;
+							++it_last;
+
+							e.replace(it_first,it_last,std::string("Xx"));
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_52()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string text = "1234567";
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,text);
+					 s2.replace(s2_it_first,s2_it_last,text);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_53()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+	[]() {
+		 std::string s1 = "hello";
+		 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+		 std::string text = "1234567";
+
+		 auto s1_it_first = s1.begin();
+		 ++s1_it_first;
+		 auto s1_it_last = s1_it_first;
+		 ++s1_it_last;
+
+		 auto s2_it_first = s2.begin();
+		 ++s2_it_first;
+		 auto s2_it_last = s2_it_first;
+		 ++s2_it_last;
+
+		 s1.replace(s1_it_first,s1_it_last,text);
+		 s2.replace(s2_it_first,s2_it_last,text);
+
+		 s1.resize(7);
+
+		 return s1 == s2;
+	},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_61()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,std::string("Xx23456"),1);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_62()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,std::string("Xx23456"),1,5);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_63()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1.replace(1,2,text,1,5);
+					 s2.replace(1,2,text,1,5);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_64()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1.replace(1,2,text,1);
+					 s2.replace(1,2,text,1);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_65()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1.replace(1,2,text,1,5);
+					 s2.replace(1,2,text,1,5);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_66()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1.replace(1,2,text,1);
+					 s2.replace(1,2,text,1);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_71()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,std::string_view("Xx23456"),1);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_72()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,std::string_view("Xx23456"),1,5);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_73()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1.replace(1,2,text,1,5);
+					 s2.replace(1,2,text,1,5);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_74()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1.replace(1,2,text,1);
+					 s2.replace(1,2,text,1);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_75()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1.replace(1,2,text,1,5);
+					 s2.replace(1,2,text,1,5);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_76()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1.replace(1,2,text,1);
+					 s2.replace(1,2,text,1);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_81()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,static_string<10>("Xx23456"),1);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_82()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,static_string<10>("Xx23456"),1,5);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_83()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 static_string<10> text = "1234567";
+
+					 s1.replace(1,2,text,1,5);
+					 s2.replace(1,2,text,1,5);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_84()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 static_string<10> text = "1234567";
+
+					 s1.replace(1,2,text,1);
+					 s2.replace(1,2,text,1);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_85()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 static_string<10> text = "1234567";
+
+					 s1.replace(1,2,text,1,5);
+					 s2.replace(1,2,text,1,5);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_86()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 static_string<10> text = "1234567";
+
+					 s1.replace(1,2,text,1);
+					 s2.replace(1,2,text,1);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_91()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,"Xx23456",4);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_92()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+
+					 s1.replace(1,2,"1234567",7);
+					 s2.replace(1,2,"1234567",7);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_93()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+
+					 s1.replace(1,2,"1234567",7);
+					 s2.replace(1,2,"1234567",7);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_101()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							auto it_first = e.begin();
+							++it_first;
+							auto it_last = it_first;
+							++it_last;
+
+							e.replace(it_first,it_last,"Xx");
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_102()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string text = "1234567";
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,text.c_str());
+					 s2.replace(s2_it_first,s2_it_last,text.c_str());
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_103()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+	[]() {
+		 std::string s1 = "hello";
+		 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+		 std::string text = "1234567";
+
+		 auto s1_it_first = s1.begin();
+		 ++s1_it_first;
+		 auto s1_it_last = s1_it_first;
+		 ++s1_it_last;
+
+		 auto s2_it_first = s2.begin();
+		 ++s2_it_first;
+		 auto s2_it_last = s2_it_first;
+		 ++s2_it_last;
+
+		 s1.replace(s1_it_first,s1_it_last,text.c_str());
+		 s2.replace(s2_it_first,s2_it_last,text.c_str());
+
+		 s1.resize(7);
+
+		 return s1 == s2;
+	},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_111()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							auto it_first = e.begin();
+							++it_first;
+							auto it_last = it_first;
+							++it_last;
+
+							e.replace(it_first,it_last,5,'x');
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_112()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,10,'x');
+					 s2.replace(s2_it_first,s2_it_last,10,'x');
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_113()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+	[]() {
+		 std::string s1 = "hello";
+		 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+
+		 auto s1_it_first = s1.begin();
+		 ++s1_it_first;
+		 auto s1_it_last = s1_it_first;
+		 ++s1_it_last;
+
+		 auto s2_it_first = s2.begin();
+		 ++s2_it_first;
+		 auto s2_it_last = s2_it_first;
+		 ++s2_it_last;
+
+		 s1.replace(s1_it_first,s1_it_last,10,'x');
+		 s2.replace(s2_it_first,s2_it_last,10,'x');
+
+		 s1.resize(7);
+
+		 return s1 == s2;
+	},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_121()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e.replace(1,2,4,'x');
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_122()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+
+					 s1.replace(1,2,7,'x');
+					 s2.replace(1,2,7,'x');
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_123()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+
+					 s1.replace(1,2,7,'x');
+					 s2.replace(1,2,7,'x');
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,

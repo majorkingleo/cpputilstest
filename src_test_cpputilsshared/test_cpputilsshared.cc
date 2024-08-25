@@ -459,6 +459,62 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_operator_plus_62() );
 		test_cases.push_back( test_case_static_string_operator_plus_63() );
 
+		test_cases.push_back( test_case_static_string_replace_11() );
+		test_cases.push_back( test_case_static_string_replace_12() );
+		test_cases.push_back( test_case_static_string_replace_13() );
+
+		test_cases.push_back( test_case_static_string_replace_21() );
+		test_cases.push_back( test_case_static_string_replace_22() );
+		test_cases.push_back( test_case_static_string_replace_23() );
+
+		test_cases.push_back( test_case_static_string_replace_31() );
+		test_cases.push_back( test_case_static_string_replace_32() );
+		test_cases.push_back( test_case_static_string_replace_33() );
+
+		test_cases.push_back( test_case_static_string_replace_41() );
+		test_cases.push_back( test_case_static_string_replace_42() );
+		test_cases.push_back( test_case_static_string_replace_43() );
+
+		test_cases.push_back( test_case_static_string_replace_51() );
+		test_cases.push_back( test_case_static_string_replace_52() );
+		test_cases.push_back( test_case_static_string_replace_53() );
+
+		test_cases.push_back( test_case_static_string_replace_61() );
+		test_cases.push_back( test_case_static_string_replace_62() );
+		test_cases.push_back( test_case_static_string_replace_63() );
+		test_cases.push_back( test_case_static_string_replace_64() );
+		test_cases.push_back( test_case_static_string_replace_65() );
+		test_cases.push_back( test_case_static_string_replace_66() );
+
+		test_cases.push_back( test_case_static_string_replace_71() );
+		test_cases.push_back( test_case_static_string_replace_72() );
+		test_cases.push_back( test_case_static_string_replace_73() );
+		test_cases.push_back( test_case_static_string_replace_74() );
+		test_cases.push_back( test_case_static_string_replace_75() );
+		test_cases.push_back( test_case_static_string_replace_76() );
+
+		test_cases.push_back( test_case_static_string_replace_81() );
+		test_cases.push_back( test_case_static_string_replace_82() );
+		test_cases.push_back( test_case_static_string_replace_83() );
+		test_cases.push_back( test_case_static_string_replace_84() );
+		test_cases.push_back( test_case_static_string_replace_85() );
+		test_cases.push_back( test_case_static_string_replace_86() );
+
+		test_cases.push_back( test_case_static_string_replace_91() );
+		test_cases.push_back( test_case_static_string_replace_92() );
+		test_cases.push_back( test_case_static_string_replace_93() );
+
+		test_cases.push_back( test_case_static_string_replace_101() );
+		test_cases.push_back( test_case_static_string_replace_102() );
+		test_cases.push_back( test_case_static_string_replace_103() );
+
+		test_cases.push_back( test_case_static_string_replace_111() );
+		test_cases.push_back( test_case_static_string_replace_112() );
+		test_cases.push_back( test_case_static_string_replace_113() );
+
+		test_cases.push_back( test_case_static_string_replace_121() );
+		test_cases.push_back( test_case_static_string_replace_122() );
+		test_cases.push_back( test_case_static_string_replace_123() );
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );
