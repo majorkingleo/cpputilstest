@@ -435,6 +435,30 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_append_112() );
 		test_cases.push_back( test_case_static_string_append_113() );
 
+		test_cases.push_back( test_case_static_string_operator_plus_11() );
+		test_cases.push_back( test_case_static_string_operator_plus_12() );
+		test_cases.push_back( test_case_static_string_operator_plus_13() );
+
+		test_cases.push_back( test_case_static_string_operator_plus_21() );
+		test_cases.push_back( test_case_static_string_operator_plus_22() );
+		test_cases.push_back( test_case_static_string_operator_plus_23() );
+
+		test_cases.push_back( test_case_static_string_operator_plus_31() );
+		test_cases.push_back( test_case_static_string_operator_plus_32() );
+		test_cases.push_back( test_case_static_string_operator_plus_33() );
+
+		test_cases.push_back( test_case_static_string_operator_plus_41() );
+		test_cases.push_back( test_case_static_string_operator_plus_42() );
+		test_cases.push_back( test_case_static_string_operator_plus_43() );
+
+		test_cases.push_back( test_case_static_string_operator_plus_51() );
+		test_cases.push_back( test_case_static_string_operator_plus_52() );
+		test_cases.push_back( test_case_static_string_operator_plus_53() );
+
+		test_cases.push_back( test_case_static_string_operator_plus_61() );
+		test_cases.push_back( test_case_static_string_operator_plus_62() );
+		test_cases.push_back( test_case_static_string_operator_plus_63() );
+
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );

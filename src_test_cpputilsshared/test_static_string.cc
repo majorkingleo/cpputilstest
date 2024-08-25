@@ -3017,6 +3017,282 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_113()
 				},true);
 }
 
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_11()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e += std::string("1234567");
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_12()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_13()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_21()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e += static_string<20>("1234567");
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_22()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 static_string<20> text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_23()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 static_string<20> text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_31()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e += 'c';
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_32()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<5,char,static_string_out_of_range_cut> s2 = s1;
+
+					 s1 += 'x';
+					 s2 += 'x';
+
+					 s1.resize(5);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_33()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<5,char,static_string_out_of_range_except> s2 = s1;
+
+					 s1 += 'X';
+					 s2 += 'X';
+
+					 s1.resize(5);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_41()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e += "1234567";
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_42()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 const char* text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_43()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 const char* text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_51()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e += { '1','2','3','4','5','6','7' };
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_52()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+
+					 s1 += { '1','2','3','4','5','6','7' };
+					 s2 += { '1','2','3','4','5','6','7' };
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_53()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+
+					 s1 += { '1','2','3','4','5','6','7' };;
+					 s2 += { '1','2','3','4','5','6','7' };;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_61()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							e += std::string_view("1234567");
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_62()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_63()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string_view text = "1234567";
+
+					 s1 += text;
+					 s2 += text;
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,

@@ -217,6 +217,29 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_111();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_112();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_113();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_11();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_12();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_13();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_21();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_22();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_23();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_31();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_32();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_33();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_41();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_42();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_43();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_51();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_52();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_53();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_61();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_62();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_plus_63();
 
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
