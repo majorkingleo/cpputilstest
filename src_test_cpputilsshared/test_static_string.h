@@ -8,6 +8,7 @@
 
 #include <TestUtils.h>
 #include <memory>
+#include <list>
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_constructor_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_constructor_2();
@@ -313,6 +314,15 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_153();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_2();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_3();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_swap_1();
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_1();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_2();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_3();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_4();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_5();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_6();
 
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();

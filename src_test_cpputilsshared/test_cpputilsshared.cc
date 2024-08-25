@@ -532,6 +532,38 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_copy_2() );
 		test_cases.push_back( test_case_static_string_copy_3() );
 
+		test_cases.push_back( test_case_static_string_swap_1() );
+
+		{
+			auto tests = test_case_static_string_find_1();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_find_2();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_find_3();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_find_4();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_find_5();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_find_6();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );
