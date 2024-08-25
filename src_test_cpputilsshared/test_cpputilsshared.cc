@@ -564,6 +564,37 @@ int main( int argc, char **argv )
 			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
 		}
 
+
+		{
+			auto tests = test_case_static_string_rfind_1();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_rfind_2();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_rfind_3();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_rfind_4();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_rfind_5();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_rfind_6();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );

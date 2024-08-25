@@ -324,6 +324,13 @@ std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_4();
 std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_5();
 std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_6();
 
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_1();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_2();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_3();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_4();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_5();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_6();
+
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_2();

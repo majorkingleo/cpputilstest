@@ -4572,6 +4572,113 @@ std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_find_6()
 	return ret;
 }
 
+
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_1()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "1",
+			create_find_1( []( auto & e ) { return e.rfind(std::string("ll") );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "2",
+				create_find_1( []( auto & e ) { return e.rfind(std::string("xx") );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "3",
+				create_find_1( []( auto & e ) { return e.rfind(std::string("ll", 1) );}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_2()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "1",
+			create_find_1( []( auto & e ) { return e.rfind(static_string<20>("ll") );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "2",
+				create_find_1( []( auto & e ) { return e.rfind(static_string<20>("xx") );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "3",
+				create_find_1( []( auto & e ) { return e.rfind(static_string<20>("ll", 1) );}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_3()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "1",
+			create_find_1( []( auto & e ) { return e.rfind("oo",1,1);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "2",
+				create_find_1( []( auto & e ) { return e.rfind("xx",0, 1 );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "3",
+				create_find_1( []( auto & e ) { return e.rfind("llo",0,2);}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_4()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "1",
+			create_find_1( []( auto & e ) { return e.rfind("oo",1);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "2",
+				create_find_1( []( auto & e ) { return e.rfind("xx",0 );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "3",
+				create_find_1( []( auto & e ) { return e.rfind("llo",4);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "4",
+					create_find_1( []( auto & e ) { return e.rfind("llo");}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_5()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "1",
+			create_find_1( []( auto & e ) { return e.rfind('o',1);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "2",
+				create_find_1( []( auto & e ) { return e.rfind('x',0 );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "3",
+				create_find_1( []( auto & e ) { return e.rfind('e',4);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "4",
+				create_find_1( []( auto & e ) { return e.rfind('h');}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_rfind_6()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "1",
+			create_find_1( []( auto & e ) { return e.rfind(std::string_view("oo"),1);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "2",
+				create_find_1( []( auto & e ) { return e.rfind(std::string_view("xx"),0 );}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "3",
+				create_find_1( []( auto & e ) { return e.rfind(std::string_view("llo"),4);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char>>(std::string(__FUNCTION__) + "4",
+					create_find_1( []( auto & e ) { return e.rfind(std::string_view("llo"));}) ) );
+
+	return ret;
+}
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,
