@@ -527,6 +527,11 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_replace_151() );
 		test_cases.push_back( test_case_static_string_replace_152() );
 		test_cases.push_back( test_case_static_string_replace_153() );
+
+		test_cases.push_back( test_case_static_string_copy_1() );
+		test_cases.push_back( test_case_static_string_copy_2() );
+		test_cases.push_back( test_case_static_string_copy_3() );
+
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );

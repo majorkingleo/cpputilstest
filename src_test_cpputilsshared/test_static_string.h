@@ -310,6 +310,10 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_151();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_152();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_153();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_3();
+
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_2();

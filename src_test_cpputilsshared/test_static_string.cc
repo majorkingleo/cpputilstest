@@ -4311,6 +4311,82 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_153()
 				},true);
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::vector<char> v1(50,0);
+					 std::vector<char> v2(50,0);
+
+					 auto do_copy = []( auto & source, std::vector<char> & dest, size_t pos ) {
+						 size_t len = source.copy( dest.data(), source.size(), pos);
+						 dest.resize(len+1);
+						 dest.at(len) = '\0';
+						 return len;
+					 };
+
+					 std::string s1 = "hello";
+					 static_string<20> s2 = s1;
+
+					 size_t len1 = do_copy( s1, v1, 0 );
+					 size_t len2 = do_copy( s2, v2, 0 );
+
+					 CPPDEBUG( format( "len1: %d len2: %d", len1, len2 ) );
+					 CPPDEBUG( format( "v1: (std::string)   '%s'", v1.data() ) );
+					 CPPDEBUG( format( "v2: (static_string) '%s'", v2.data() ) );
+
+					 return len1 == len2 && v1 == v2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_2()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::vector<char> v1(50,0);
+					 std::vector<char> v2(50,0);
+
+					 auto do_copy = []( auto & source, std::vector<char> & dest, size_t pos ) {
+						 size_t len = source.copy( dest.data(), source.size(), pos);
+						 dest.resize(len+1);
+						 dest.at(len) = '\0';
+						 return len;
+					 };
+
+					 std::string s1 = "hello";
+					 static_string<20> s2 = s1;
+
+					 size_t len1 = do_copy( s1, v1, 3 );
+					 size_t len2 = do_copy( s2, v2, 3 );
+
+					 CPPDEBUG( format( "len1: %d len2: %d", len1, len2 ) );
+					 CPPDEBUG( format( "v1: (std::string)   '%s'", v1.data() ) );
+					 CPPDEBUG( format( "v2: (static_string) '%s'", v2.data() ) );
+
+					 return len1 == len2 && v1 == v2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_3()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::vector<char> v2(50,0);
+
+					 auto do_copy = []( auto & source, std::vector<char> & dest, size_t pos ) {
+						 size_t len = source.copy( dest.data(), source.size(), pos);
+						 dest.resize(len+1);
+						 dest.at(len) = '\0';
+						 return len;
+					 };
+
+					 static_string<20> s2 = "hello";
+
+					 size_t len2 = do_copy( s2, v2, 7 );
+
+					 return false;
+				},true);
+}
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
