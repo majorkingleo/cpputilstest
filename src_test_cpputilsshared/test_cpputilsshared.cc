@@ -515,6 +515,18 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_replace_121() );
 		test_cases.push_back( test_case_static_string_replace_122() );
 		test_cases.push_back( test_case_static_string_replace_123() );
+
+		test_cases.push_back( test_case_static_string_replace_131() );
+		test_cases.push_back( test_case_static_string_replace_132() );
+		test_cases.push_back( test_case_static_string_replace_133() );
+
+		test_cases.push_back( test_case_static_string_replace_141() );
+		test_cases.push_back( test_case_static_string_replace_142() );
+		test_cases.push_back( test_case_static_string_replace_143() );
+
+		test_cases.push_back( test_case_static_string_replace_151() );
+		test_cases.push_back( test_case_static_string_replace_152() );
+		test_cases.push_back( test_case_static_string_replace_153() );
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );

@@ -4092,6 +4092,226 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_123()
 				},true);
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_131()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							std::string_view sv("1234567");
+							auto it_first = e.begin();
+							++it_first;
+
+							auto it_last = it_first;
+							++it_last;
+
+							e.replace(it_first,it_last,sv.begin(),sv.end());
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_132()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string_view sv("1234567");
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,sv.begin(),sv.end());
+					 s2.replace(s2_it_first,s2_it_last,sv.begin(),sv.end());
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_133()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string_view sv("1234567");
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,sv.begin(),sv.end());
+					 s2.replace(s2_it_first,s2_it_last,sv.begin(),sv.end());
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_141()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+
+							auto it_first = e.begin();
+							++it_first;
+
+							auto it_last = it_first;
+							++it_last;
+
+							e.replace(it_first,it_last,{ '1','2','3','4','5','6','7' });
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_142()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,{ '1','2','3','4','5','6','7' });
+					 s2.replace(s2_it_first,s2_it_last,{ '1','2','3','4','5','6','7' });
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_143()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,{ '1','2','3','4','5','6','7' });
+					 s2.replace(s2_it_first,s2_it_last,{ '1','2','3','4','5','6','7' });
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_151()
+{
+	return std::make_shared<TestEqualToString<50,char>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							e = "hello";
+							std::string_view sv("1234567");
+							auto it_first = e.begin();
+							++it_first;
+
+							auto it_last = it_first;
+							++it_last;
+
+							e.replace(it_first,it_last,sv);
+						}, v );
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_152()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_cut> s2 = s1;
+					 std::string_view sv("1234567");
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,sv);
+					 s2.replace(s2_it_first,s2_it_last,sv);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_153()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+				[]() {
+					 std::string s1 = "hello";
+					 static_basic_string<7,char,static_string_out_of_range_except> s2 = s1;
+					 std::string_view sv("1234567");
+
+					 auto s1_it_first = s1.begin();
+					 ++s1_it_first;
+					 auto s1_it_last = s1_it_first;
+					 ++s1_it_last;
+
+					 auto s2_it_first = s2.begin();
+					 ++s2_it_first;
+					 auto s2_it_last = s2_it_first;
+					 ++s2_it_last;
+
+					 s1.replace(s1_it_first,s1_it_last,sv);
+					 s2.replace(s2_it_first,s2_it_last,sv);
+
+					 s1.resize(7);
+
+					 return s1 == s2;
+				},true);
+}
+
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,

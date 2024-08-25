@@ -298,6 +298,18 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_121();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_122();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_123();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_131();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_132();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_133();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_141();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_142();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_143();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_151();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_152();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_replace_153();
+
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_2();
