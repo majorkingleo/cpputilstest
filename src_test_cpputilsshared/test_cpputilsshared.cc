@@ -389,6 +389,51 @@ int main( int argc, char **argv )
 
 		test_cases.push_back( test_case_static_string_append_21() );
 		test_cases.push_back( test_case_static_string_append_22() );
+		test_cases.push_back( test_case_static_string_append_23() );
+		test_cases.push_back( test_case_static_string_append_24() );
+
+		test_cases.push_back( test_case_static_string_append_31() );
+		test_cases.push_back( test_case_static_string_append_32() );
+		test_cases.push_back( test_case_static_string_append_33() );
+
+		test_cases.push_back( test_case_static_string_append_41() );
+		test_cases.push_back( test_case_static_string_append_42() );
+		test_cases.push_back( test_case_static_string_append_43() );
+		test_cases.push_back( test_case_static_string_append_44() );
+
+		test_cases.push_back( test_case_static_string_append_51() );
+		test_cases.push_back( test_case_static_string_append_52() );
+		test_cases.push_back( test_case_static_string_append_53() );
+		test_cases.push_back( test_case_static_string_append_54() );
+
+		test_cases.push_back( test_case_static_string_append_61() );
+		test_cases.push_back( test_case_static_string_append_62() );
+		test_cases.push_back( test_case_static_string_append_63() );
+		test_cases.push_back( test_case_static_string_append_64() );
+
+		test_cases.push_back( test_case_static_string_append_71() );
+		test_cases.push_back( test_case_static_string_append_72() );
+		test_cases.push_back( test_case_static_string_append_73() );
+		test_cases.push_back( test_case_static_string_append_74() );
+
+		test_cases.push_back( test_case_static_string_append_81() );
+		test_cases.push_back( test_case_static_string_append_82() );
+		test_cases.push_back( test_case_static_string_append_83() );
+		test_cases.push_back( test_case_static_string_append_84() );
+
+		test_cases.push_back( test_case_static_string_append_91() );
+		test_cases.push_back( test_case_static_string_append_92() );
+		test_cases.push_back( test_case_static_string_append_93() );
+		test_cases.push_back( test_case_static_string_append_94() );
+
+		test_cases.push_back( test_case_static_string_append_101() );
+		test_cases.push_back( test_case_static_string_append_102() );
+		test_cases.push_back( test_case_static_string_append_103() );
+		test_cases.push_back( test_case_static_string_append_104() );
+
+		test_cases.push_back( test_case_static_string_append_111() );
+		test_cases.push_back( test_case_static_string_append_112() );
+		test_cases.push_back( test_case_static_string_append_113() );
 
 #if 0
 		test_cases.push_back( test_case_static_string_operator_1() );

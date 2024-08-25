@@ -171,6 +171,52 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_13();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_21();
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_22();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_23();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_24();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_31();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_32();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_33();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_41();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_42();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_43();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_44();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_51();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_52();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_53();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_54();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_61();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_62();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_63();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_64();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_71();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_72();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_73();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_74();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_81();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_82();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_83();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_84();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_91();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_92();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_93();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_94();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_101();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_102();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_103();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_104();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_111();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_112();
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_113();
+
 
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();
