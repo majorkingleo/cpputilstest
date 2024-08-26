@@ -64,7 +64,7 @@ int main( int argc, char **argv )
 #endif
 
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
-#if 0
+
 		test_cases.push_back( test_case_toupper1() );
 		test_cases.push_back( test_case_toupper2() );
 		test_cases.push_back( test_case_toupper3() );
@@ -364,7 +364,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_insert_152() );
 		test_cases.push_back( test_case_static_string_insert_153() );
 		test_cases.push_back( test_case_static_string_insert_154() );
-#endif
+
 		test_cases.push_back( test_case_static_string_erase_11() );
 		test_cases.push_back( test_case_static_string_erase_12() );
 		test_cases.push_back( test_case_static_string_erase_13() );
@@ -629,7 +629,47 @@ int main( int argc, char **argv )
 			auto tests = test_case_static_string_compare_7();
 			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
 		}
-#if 0
+
+		{
+			auto tests = test_case_static_string_compare_8();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_compare_9();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_starts_with_1();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_starts_with_2();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_starts_with_3();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_ends_with_1();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_ends_with_2();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
+		{
+			auto tests = test_case_static_string_ends_with_3();
+			test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+		}
+
 		test_cases.push_back( test_case_static_string_operator_1() );
 		test_cases.push_back( test_case_static_string_operator_2() );
 		test_cases.push_back( test_case_static_string_operator_3() );
@@ -707,7 +747,7 @@ int main( int argc, char **argv )
 
 		test_cases.push_back( test_case_static_string_substr_1() );
 		test_cases.push_back( test_case_static_string_substr_2() );
-#endif
+
 		ColBuilder col;
 
 		const int COL_IDX 		= col.addCol( "Idx" );

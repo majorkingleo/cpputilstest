@@ -338,6 +338,17 @@ std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_4
 std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_5();
 std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_6();
 std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_7();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_8();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_9();
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_starts_with_1();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_starts_with_2();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_starts_with_3();
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_ends_with_1();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_ends_with_2();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_ends_with_3();
+
 
 #if __cpp_lib_string_contains >= 202011L
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_contains_1();

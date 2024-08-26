@@ -4777,6 +4777,113 @@ std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_7
 	return ret;
 }
 
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_8()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,int>>(std::string(__FUNCTION__) + "1",
+			create_find_1<int>( []( auto e ) { return e.compare(1,std::string::npos,std::string_view("ll"));}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,int>>(std::string(__FUNCTION__) + "2",
+			create_find_1<int>( []( auto e ) { return e.compare(1,2,std::string_view("xxx"));}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_compare_9()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,int>>(std::string(__FUNCTION__) + "1",
+			create_find_1<int>( []( auto e ) { return e.compare(1,std::string::npos,std::string_view("hello"),2,3);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,int>>(std::string(__FUNCTION__) + "2",
+			create_find_1<int>( []( auto e ) { return e.compare(1,3,std::string_view("hello"),1,2);}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,int>>(std::string(__FUNCTION__) + "2",
+			create_find_1<int>( []( auto e ) { return e.compare(1,3,std::string_view("hello"),1);}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_starts_with_1()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "1",
+			create_find_1<bool>( []( auto e ) { return e.starts_with(std::string_view("h"));}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "2",
+			create_find_1<bool>( []( auto e ) { return e.starts_with(std::string_view("x"));}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_starts_with_2()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "1",
+			create_find_1<bool>( []( auto e ) { return e.starts_with('h');}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "2",
+			create_find_1<bool>( []( auto e ) { return e.starts_with('x');}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_starts_with_3()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "1",
+			create_find_1<bool>( []( auto e ) { return e.starts_with("he");}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "2",
+			create_find_1<bool>( []( auto e ) { return e.starts_with("xx");}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_ends_with_1()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "1",
+			create_find_1<bool>( []( auto e ) { return e.ends_with(std::string_view("lo"));}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "2",
+			create_find_1<bool>( []( auto e ) { return e.ends_with(std::string_view("x"));}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_ends_with_2()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "1",
+			create_find_1<bool>( []( auto e ) { return e.ends_with('o');}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "2",
+			create_find_1<bool>( []( auto e ) { return e.ends_with('x');}) ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_static_string_ends_with_3()
+{
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "1",
+			create_find_1<bool>( []( auto e ) { return e.ends_with("lo");}) ) );
+
+	ret.push_back( std::make_shared<TestEqualToStringRet<50,char,bool>>(std::string(__FUNCTION__) + "2",
+			create_find_1<bool>( []( auto e ) { return e.ends_with("xx");}) ) );
+
+	return ret;
+}
+
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_c_str_1()
 {
 	return std::make_shared<TestBool>(__FUNCTION__,
