@@ -3,6 +3,7 @@ bin_PROGRAMS=\
 	test_format11 \
 	test_format98 \
 	test_wformat \
+	test_static_format \
 	test_cpputilsshared \
 	test_io
 	
@@ -20,6 +21,10 @@ test_format98_SOURCES=\
 		
 test_wformat_SOURCES=\
 		src_test_format/test_wformat.cc \
+		tools_config.h
+		
+test_static_format_SOURCES=\
+		src_test_format/test_static_format.cc \
 		tools_config.h
 
 test_cpputilsshared_SOURCES=\
@@ -47,7 +52,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/tools \
 	-I$(top_srcdir)/cpputils/cpputilsshared/cpputilsformat \
 	-I$(top_srcdir)/cpputils/io \
 	-I$(top_srcdir)/common \
-	-std=gnu++20 \
+	-std=gnu++23 \
 	-D_GLIBCXX_USE_CXX11_ABI=1 \
 	-D_XOPEN_SOURCE=700 # for cyggwin fileno()
 
@@ -134,6 +139,10 @@ test_format98_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a
 	cpputils/io/libcpputilsio.a
 
 test_wformat_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a \
+	cpputils/io/libcpputilsio.a \
+	cpputils/cpputilsshared/libcpputilsshared.a
+
+test_static_format_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a \
 	cpputils/io/libcpputilsio.a \
 	cpputils/cpputilsshared/libcpputilsshared.a
 
