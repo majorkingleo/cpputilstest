@@ -72,44 +72,44 @@ namespace Tools {
       }
 
       template <class N> bool is_int( const N &n ) const { return false; }
-      bool is_int( const int* n ) const { return true; }
-      bool is_int( const unsigned int* n ) const { return true; }
-      bool is_int( const short* n ) const { return true; }
-      bool is_int( const unsigned short* ) const { return true; }
-      bool is_int( const unsigned long* ) const { return true; }
-      bool is_int( const unsigned long long* ) const { return true; }
-      bool is_int( const long long* ) const { return true; }
+      bool is_int( const int n ) const { return true; }
+      bool is_int( const unsigned int n ) const { return true; }
+      bool is_int( const short n ) const { return true; }
+      bool is_int( const unsigned short ) const { return true; }
+      bool is_int( const unsigned long ) const { return true; }
+      bool is_int( const unsigned long long ) const { return true; }
+      bool is_int( const long long ) const { return true; }
 
       template <class S> bool is_string( const S &s_ ) const { return false; }
-      bool is_string( std::string* s_ ) const { return true; }
-      bool is_string( const std::string* s_ ) const { return true; }
-      bool is_string( std::string_view* s_ ) const { return true; }
-      bool is_string( const std::string_view* s_ ) const { return true; }
-      bool is_string( char** ) const { return true; }
-      bool is_string( const char** ) const { return true; }
-      bool is_string( const char* const* ) const { return true; }
+      bool is_string( std::string & s_ ) const { return true; }
+      bool is_string( const std::string & s_ ) const { return true; }
+      bool is_string( std::string_view & s_ ) const { return true; }
+      bool is_string( const std::string_view & s_ ) const { return true; }
+      bool is_string( char* ) const { return true; }
+      bool is_string( const char* ) const { return true; }
     };
 
     template<typename Arg, std::size_t N_SIZE>
     class RealArg : public BaseArg<N_SIZE>
     {
-      const Arg *arg;
+      const Arg arg;
     public:
 
+      RealArg() : arg(nullptr) {}
       RealArg( const Arg & arg_ )
-		: BaseArg<N_SIZE>( BaseArg<N_SIZE>::is_int( &arg_ ), BaseArg<N_SIZE>::is_string( &arg_ ) ),
-		  arg(&arg_)
+		: BaseArg<N_SIZE>( BaseArg<N_SIZE>::is_int( arg_ ), BaseArg<N_SIZE>::is_string( arg_ ) ),
+		  arg(arg_)
 		{
 		}
 
       Tools::static_string<N_SIZE> doFormat( const Format::CFormat & cf ) override
       {
-        return x2s( *arg, cf );;
+        return x2s( arg, cf );;
       }
 
       int get_int() override {
         BaseArg<N_SIZE>::get_int();
-        return get_int(*arg);
+        return get_int(arg);
       }
 
 
@@ -132,7 +132,36 @@ namespace Tools {
         return str.str();
       }
     };
+/*
+    template<std::size_t N_SIZE>
+    class RealArg<const char,N_SIZE> : public BaseArg<N_SIZE>
+    {
+      const char *arg;
+    public:
 
+      RealArg() : arg(nullptr) {}
+      RealArg( const char *arg_ )
+		: BaseArg<N_SIZE>( false, true ),
+		  arg(arg_)
+		{
+		}
+
+      Tools::static_string<N_SIZE> doFormat( const Format::CFormat & cf ) override
+      {
+        return x2s( arg, cf );;
+      }
+
+    private:
+      template<class T> int get_int( const T &t ) { return 0; }
+
+      template <class S> static std::string x2s( S ss, const Format::CFormat &cf )
+      {
+        std::stringstream str;
+        str << cf << ss;
+        return str.str();
+      }
+    };
+*/
     template <std::size_t N_SIZE, class BaseArgType, class CastTo>
     class RealArgCastFromChar : public BaseArg<N_SIZE>
         {
@@ -236,7 +265,7 @@ namespace Tools {
       v_args.push_back( RealArg<Arg,N_SIZE>(arg) );
     }
 
-    template<std::size_t N_SIZE, typename VECTOR_LIKE, typename A, typename... Arg> void add_args( VECTOR_LIKE & v_args, A & a, Arg... arg )
+    template<std::size_t N_SIZE, typename VECTOR_LIKE, typename A, typename... Arg> void add_args( VECTOR_LIKE & v_args, A & a, Arg&... arg )
     {
       add_argsx<N_SIZE>( v_args, a );
       add_args<N_SIZE>( v_args, arg... );
@@ -311,13 +340,13 @@ namespace Tools {
 
 		// end of recursive call: tuple is forwared using `type`
 		template <std::size_t N_SIZE, typename T, typename... Ts>
-		struct unique_impl {using type = T;};
+		struct unique_impl {using type = std::remove_reference<T>::type;};
 
 		// recursive call: 1. Consumes the first type of the variadic arguments,
 		//                    if not repeated add it to the tuple.
 		//                 2. Call this again with the rest of arguments
 		template <std::size_t N_SIZE, template<class...> class Tuple, typename... Ts, typename U, typename... Us>
-		struct unique_impl<N_SIZE, Tuple<Ts...>, U, Us...>
+		struct unique_impl<N_SIZE, Tuple<Ts...>,  U, Us...>
 			: std::conditional_t<(std::is_same_v<RealArg<U,N_SIZE>, Ts> || ...) // but pack the type in RealArg class
 							   , unique_impl<N_SIZE,Tuple<Ts...>, Us...>
 							   , unique_impl<N_SIZE,Tuple<Ts..., RealArg<U,N_SIZE>>, Us...>> {}; // but pack the type in RealArg class
@@ -352,6 +381,8 @@ namespace Tools {
     StaticFormat::add_args<N_SIZE>( v_args, args... );
 
     StaticFormat::Format<N_ARGS,N_SIZE,vector> f2( format, v_args );
+
+    // std::cout << demangle( typeid(variant).name() ) << std::endl;
 
     return f2.get_string();
   }

@@ -41,7 +41,9 @@ std::string demangle( const std::string & name )
 template <class T>
 struct RealArg
 {
-	T value;
+	std::remove_reference<T>::type *value;
+
+
 };
 
 // https://stackoverflow.com/a/62089731/20079418
@@ -70,15 +72,20 @@ struct unique_tuple<Tuple<Ts...>> : public unique_impl<Tuple<>, Ts...> {};
 
 
 template<typename ...T>
-void add( T ...t )
+void add( T&& ...t )
 {
 	//using variant = typename pack_variant<T...>::type;
 	using variant = unique_tuple<std::variant<T...>>::type;
+	using vector = Tools::static_vector<variant,20>;
+
+	vector v;
 
 	int status = 0;
 
 	//std::cout << typeid(variant).name() << std::endl;
 	std::cout << demangle(typeid(variant).name()) << std::endl;
+	std::cout << "\n";
+	std::cout << demangle(typeid(vector).name()) << std::endl;
 }
 #endif
 int main( int argc, char **argv )
@@ -88,12 +95,19 @@ int main( int argc, char **argv )
   char buffer[250];
   std::string aa, bb;
 #if 0
+  add( "x", std::string("x") );
+
+  // add( std::string("x") );
+/*
   add( 1 ); //, 2, std::string() );
+  */
+  /*
   add( 1, 2 );
-  add( 1, 2, std::string() );
+  add( 1, 2, std::string("x") );
+  add( 1, 2, "x" );
   add( 1, 2, std::string(), 1.5 );
   add( 1, 2, std::string(), 1.5, std::string(), 1, 3 );
-
+	*/
   return 0;
 #endif
 
@@ -117,16 +131,22 @@ int main( int argc, char **argv )
 */
 
 
-  std::cout << static_format<20,char>("test %d %s %f","x", std::string("y"), 1) << std::endl;
+  //std::cout << static_format<20,char>("test %d %s %f","x", std::string("y"), 1) << std::endl;
 
-  std::cout << static_format<20,char> ("%.3s", "HALLO" ) << std::endl;
+  //std::cout << static_format<20,char>("test %d %s %f", "y" ) << std::endl;
 
-  //return 0;
+  //std::cout << static_format<20,char> ("%.3s", "HALLO" ) << std::endl;
 
+
+
+  std::cout << static_format<20,char> ("%.3s", 1 ) << std::endl;
+  std::cout << static_format<20,char> ("%.3s", std::string("x") ) << std::endl;
+  std::cout << static_format<20,char> ("%.3s", "x" ) << std::endl;
+
+#if 1
 #if __cpp_exceptions > 0
   try {
 #endif
-
       TEST( (static_format<20,char>( "%s", "String" )), 				sprintf( buffer, "%s", "String" ));
       TEST( (static_format<20,char> ("%d", 155 )),                      sprintf( buffer, "%d", 155 ));
       TEST( (static_format<20,char> ("%f", 155.1 )),                    sprintf( buffer, "%f", 155.1 ) );
@@ -176,6 +196,7 @@ int main( int argc, char **argv )
   } catch( std::exception & error ) {
     std::cerr << format( "Error: %s\n", error.what() );
   }
+#endif
 #endif
   return 0;
 }
