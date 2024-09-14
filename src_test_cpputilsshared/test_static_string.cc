@@ -19,7 +19,7 @@ template<std::size_t N,class T>
 bool operator==( const static_basic_string<N,T> & c, const std::basic_string<T> & v )
 {
     if( c.size() != v.size() ) {
-    	// CPPDEBUG( format("c.size != v.size => %d != %d", c.size(), v.size()) );
+    	// CPPDEBUG( Tools::format("c.size != v.size => %d != %d", c.size(), v.size()) );
         return false;
     }
 
@@ -80,7 +80,7 @@ struct TestEqualToString : public TestCaseBase<bool>
         func( cv );
 
         if( !(std::get<0>(cc) == std::get<1>(cv)) ) {
-        	CPPDEBUG( format( "FAILED: '%s' {%d}(static_basic_string<%d>) != '%s' {%d}(basic_string)",
+        	CPPDEBUG( Tools::format( "FAILED: '%s' {%d}(static_basic_string<%d>) != '%s' {%d}(basic_string)",
         			std::get<0>(cc),
 					std::get<0>(cc).size(),
 					N,
@@ -136,7 +136,7 @@ struct TestEqualToStringRet : public TestCaseBase<bool>
         auto ret2 = func( cv );
 
         if( ret1 != ret2 ) {
-        	CPPDEBUG( format( "FAILED: '%s' {%d}(static_basic_string<%d>) ret: %d != %d '%s' {%d}(basic_string)",
+        	CPPDEBUG( Tools::format( "FAILED: '%s' {%d}(static_basic_string<%d>) ret: %d != %d '%s' {%d}(basic_string)",
         			std::get<0>(cc),
 					std::get<0>(cc).size(),
 					N,
@@ -323,7 +323,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string1()
 {
 	static_string<10> s( "hello" );
 
-	CPPDEBUG( format("s: %s", s ) );
+	CPPDEBUG( Tools::format("s: %s", s ) );
 
 	return std::make_shared<TestEqualToString<10,char>>(__FUNCTION__,
 			[]( auto & v ) {
@@ -331,7 +331,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string1()
 						[](auto & e){
 							e = "nix";
 							e += '1';
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -343,7 +343,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string2()
 				std::visit(
 						[](auto & e){
 							e.clear();
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -356,7 +356,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string3()
 				std::visit(
 						[](auto & e){
 							e = std::string("XXX");
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -368,7 +368,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string4()
 				std::visit(
 						[](auto & e){
 							e = std::string("XXX");
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -380,7 +380,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string5()
 				std::visit(
 						[](auto & e){
 							e = std::string("01234567890123456789");
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -392,7 +392,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string6()
 				std::visit(
 						[](auto & e){
 							e = std::string("012345678901234567890123456789");
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -404,7 +404,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string7()
 				std::visit(
 						[](auto & e){
 							e = std::string("0123456789012345678901234567890123456789");
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -416,7 +416,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string8()
 				std::visit(
 						[](auto & e){
 							e = std::string("01234567890123456789012345678901234567890123456789");
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -430,7 +430,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_1()
 						[](auto & e){
 							e = std::string("'%s'");
 							e.replace( 1, 2, "hello" );
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -443,7 +443,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_replace_2()
 						[](auto & e){
 							e = std::string("'hello'");
 							e.replace( 1, 5, "%s" );
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }
@@ -735,8 +735,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_2()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -753,8 +753,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_2()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -770,8 +770,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_2()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -787,8 +787,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_2()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -804,8 +804,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_2()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -853,8 +853,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_41()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -871,8 +871,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_41()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -888,8 +888,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_41()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -905,8 +905,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_41()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -922,8 +922,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_41()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -970,8 +970,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_51()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -988,8 +988,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_51()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1005,8 +1005,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_51()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1022,8 +1022,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_51()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1072,8 +1072,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_61()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1090,8 +1090,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_61()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1107,8 +1107,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_61()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1124,8 +1124,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_61()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1161,8 +1161,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_7()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1179,8 +1179,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_7()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1196,8 +1196,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_7()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1213,8 +1213,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_7()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1274,8 +1274,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_82()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1292,8 +1292,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_82()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1309,8 +1309,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_82()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1326,8 +1326,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_82()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1363,8 +1363,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_84()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'{%d}", s1, s1.size() ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'{%d}", s2, s2.size() ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'{%d}", s1, s1.size() ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'{%d}", s2, s2.size() ) );
 				 return false;
 			 };
 
@@ -1381,8 +1381,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_84()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1398,8 +1398,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_84()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1415,8 +1415,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_84()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1442,8 +1442,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_9()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1460,8 +1460,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_9()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1477,8 +1477,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_9()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1494,8 +1494,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_9()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1531,8 +1531,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_92()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'{%d}", s1, s1.size() ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'{%d}", s2, s2.size() ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'{%d}", s1, s1.size() ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'{%d}", s2, s2.size() ) );
 				 return false;
 			 };
 
@@ -1549,8 +1549,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_92()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1566,8 +1566,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_92()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1583,8 +1583,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_92()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -1642,8 +1642,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_103()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1659,8 +1659,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_103()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1676,8 +1676,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_103()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1736,8 +1736,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_113()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1753,8 +1753,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_113()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1770,8 +1770,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_113()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1830,8 +1830,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_123()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1847,8 +1847,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_123()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1864,8 +1864,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_123()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1929,8 +1929,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_133()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1947,8 +1947,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_133()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -1965,8 +1965,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_133()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -2026,8 +2026,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_143()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -2043,8 +2043,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_143()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -2061,8 +2061,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_143()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			};
 
@@ -2113,8 +2113,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_152()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -2131,8 +2131,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_152()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -2148,8 +2148,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_152()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -2165,8 +2165,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_152()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -2202,8 +2202,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_154()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'{%d}", s1, s1.size() ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'{%d}", s2, s2.size() ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'{%d}", s1, s1.size() ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'{%d}", s2, s2.size() ) );
 				 return false;
 			 };
 
@@ -2220,8 +2220,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_154()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -2237,8 +2237,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_154()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s1 (static_string): '%s'", s1 ) );
-				 CPPDEBUG( format( "s2 (std::string)  : '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (static_string): '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (std::string)  : '%s'", s2 ) );
 				 return false;
 			 };
 
@@ -2254,8 +2254,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_insert_154()
 					 return true;
 				 }
 
-				 CPPDEBUG( format( "s2 (static_string): '%s'", s2 ) );
-				 CPPDEBUG( format( "s1 (std::string)  : '%s'", s1 ) );
+				 CPPDEBUG( Tools::format( "s2 (static_string): '%s'", s2 ) );
+				 CPPDEBUG( Tools::format( "s1 (std::string)  : '%s'", s1 ) );
 				 return false;
 			 };
 
@@ -2467,8 +2467,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_12()
 
 					 s1.resize(7);
 
-					 CPPDEBUG( format( "s2 (static_string): '%s'", s2 ) );
-					 CPPDEBUG( format( "s1 (std::string)  : '%s'", s1 ) );
+					 CPPDEBUG( Tools::format( "s2 (static_string): '%s'", s2 ) );
+					 CPPDEBUG( Tools::format( "s1 (std::string)  : '%s'", s1 ) );
 
 					 return s1 == s2;
 				});
@@ -2526,8 +2526,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_23()
 
 					 s1.resize(7);
 
-					 CPPDEBUG( format( "s2 (static_string): '%s'", s2 ) );
-					 CPPDEBUG( format( "s1 (std::string)  : '%s'", s1 ) );
+					 CPPDEBUG( Tools::format( "s2 (static_string): '%s'", s2 ) );
+					 CPPDEBUG( Tools::format( "s1 (std::string)  : '%s'", s1 ) );
 
 					 return s1 == s2;
 				});
@@ -2985,8 +2985,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_103()
 
 					 s1.resize(7);
 
-					 CPPDEBUG( format( "s2 (static_string): '%s'", s2 ) );
-					 CPPDEBUG( format( "s1 (std::string)  : '%s'", s1 ) );
+					 CPPDEBUG( Tools::format( "s2 (static_string): '%s'", s2 ) );
+					 CPPDEBUG( Tools::format( "s1 (std::string)  : '%s'", s1 ) );
 
 					 return s1 == s2;
 				});
@@ -3034,8 +3034,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_append_112()
 
 					 s1.resize(7);
 
-					 CPPDEBUG( format( "s2 (static_string): '%s'", s2 ) );
-					 CPPDEBUG( format( "s1 (std::string)  : '%s'", s1 ) );
+					 CPPDEBUG( Tools::format( "s2 (static_string): '%s'", s2 ) );
+					 CPPDEBUG( Tools::format( "s1 (std::string)  : '%s'", s1 ) );
 
 					 return s1 == s2;
 				});
@@ -4371,9 +4371,9 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_1()
 					 size_t len1 = do_copy( s1, v1, 0 );
 					 size_t len2 = do_copy( s2, v2, 0 );
 
-					 CPPDEBUG( format( "len1: %d len2: %d", len1, len2 ) );
-					 CPPDEBUG( format( "v1: (std::string)   '%s'", v1.data() ) );
-					 CPPDEBUG( format( "v2: (static_string) '%s'", v2.data() ) );
+					 CPPDEBUG( Tools::format( "len1: %d len2: %d", len1, len2 ) );
+					 CPPDEBUG( Tools::format( "v1: (std::string)   '%s'", v1.data() ) );
+					 CPPDEBUG( Tools::format( "v2: (static_string) '%s'", v2.data() ) );
 
 					 return len1 == len2 && v1 == v2;
 				});
@@ -4399,9 +4399,9 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_copy_2()
 					 size_t len1 = do_copy( s1, v1, 3 );
 					 size_t len2 = do_copy( s2, v2, 3 );
 
-					 CPPDEBUG( format( "len1: %d len2: %d", len1, len2 ) );
-					 CPPDEBUG( format( "v1: (std::string)   '%s'", v1.data() ) );
-					 CPPDEBUG( format( "v2: (static_string) '%s'", v2.data() ) );
+					 CPPDEBUG( Tools::format( "len1: %d len2: %d", len1, len2 ) );
+					 CPPDEBUG( Tools::format( "v1: (std::string)   '%s'", v1.data() ) );
+					 CPPDEBUG( Tools::format( "v2: (static_string) '%s'", v2.data() ) );
 
 					 return len1 == len2 && v1 == v2;
 				});
@@ -5195,7 +5195,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_string_append_1()
 				std::visit(
 						[](auto & e){
 							e.append("1").append(std::string("2")).append(std::string_view("3")).append({'4'});
-							CPPDEBUG( format( "string: %s", e ) );
+							CPPDEBUG( Tools::format( "string: %s", e ) );
 						}, v );
 			});
 }

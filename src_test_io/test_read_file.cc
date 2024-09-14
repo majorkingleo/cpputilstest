@@ -94,7 +94,7 @@ public:
 
 	SystemInfo()
 	{
-		CPPDEBUG( format( "sizeof(wchar_t): %d", sizeof(wchar_t) ) );
+		CPPDEBUG( Tools::format( "sizeof(wchar_t): %d", sizeof(wchar_t) ) );
 
 		if( sizeof(wchar_t) == sizeof(uint16_t) ) {
 			encoding = NativEncoding::UTF16LE;
@@ -147,7 +147,7 @@ public:
 		std::wstring content;
 
 		if( !rf.read_file( in_file, content ) ) {
-			throw STDERR_EXCEPTION( format( "cannot open file: '%s'", in_file ));
+			throw STDERR_EXCEPTION( Tools::format( "cannot open file: '%s'", in_file ));
 		}
 
 		const std::size_t content_size = content.size() * sizeof(decltype(content)::value_type);
@@ -155,7 +155,7 @@ public:
 		std::string encoding;
 
 		if( !XML::read_file( expected_encoding_file, encoding ) ) {
-			throw STDERR_EXCEPTION( format( "cannot open file: '%s'", expected_encoding_file ));
+			throw STDERR_EXCEPTION( Tools::format( "cannot open file: '%s'", expected_encoding_file ));
 		}
 
 		auto vs = split_and_strip_simple( encoding );
@@ -163,14 +163,14 @@ public:
 
 
 		if( sencodings.count( rf.getFileEncoding() ) == 0 ) {
-			CPPDEBUG( format( "file encoding: '%s' expected encoding: '%s'", rf.getFileEncoding(), encoding ) );
+			CPPDEBUG( Tools::format( "file encoding: '%s' expected encoding: '%s'", rf.getFileEncoding(), encoding ) );
 			return false;
 		}
 
 		auto data_expected = read_file_bin( expected_file );
 
 		if( data_expected->size() != content.size() * sizeof(std::wstring::value_type) ) {
-			CPPDEBUG( format( "expected size: %d contect size: %d", data_expected->size(), content_size ) );
+			CPPDEBUG( Tools::format( "expected size: %d contect size: %d", data_expected->size(), content_size ) );
 			return false;
 		}
 
@@ -190,11 +190,11 @@ public:
 
 			for( unsigned i = 0; i < content_size; i++ ) {
 				if( content[i] != wdata[i] ) {
-					CPPDEBUG( format( "diff[%d]: 0x%X != 0x%X ", i, static_cast<unsigned>(content[i]), static_cast<unsigned>(wdata[i]) ) );
+					CPPDEBUG( Tools::format( "diff[%d]: 0x%X != 0x%X ", i, static_cast<unsigned>(content[i]), static_cast<unsigned>(wdata[i]) ) );
 				}
 			}
 
-			CPPDEBUG( format( "data differs: %d", n ) );
+			CPPDEBUG( Tools::format( "data differs: %d", n ) );
 			return false;
 		}
 

@@ -399,7 +399,7 @@ public:
 		v.insert(v.end(),-1);
 		c.insert(c.end(),-1);
 
-		CPPDEBUG( format( "c: %s v: %s", c, v ) );
+		CPPDEBUG( Tools::format( "c: %s v: %s", c, v ) );
 
 		return c == v;;
 	}
@@ -428,7 +428,7 @@ public:
 		c.insert(++c.begin(),-1);
 		v.insert(++v.begin(),-1);
 
-		CPPDEBUG( format("v: %s c: %s", v, c ) );
+		CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
 
 		return c == v;;
 	}
@@ -458,7 +458,7 @@ public:
 		c.insert(c.begin(),-1);
 		v.insert(v.begin(),-1);
 
-		CPPDEBUG( format("v: %s c: %s", v, c ) );
+		CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
 
 		return c == v;;
 	}
@@ -491,7 +491,7 @@ public:
 	  pos(other.pos),
 	  count( other.count + 1 )
 	{
-		CPPDEBUG( format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
+		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
 	}
 
 	InstanceCounter( InstanceCounter && other )
@@ -499,16 +499,16 @@ public:
 	  pos(other.pos),
 	  count( other.count )
 	{
-		CPPDEBUG( format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
+		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
 	}
 
 	~InstanceCounter() {
-		CPPDEBUG( format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
+		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
 	}
 
 	const InstanceCounter & operator=( const InstanceCounter & other )
 	{
-		CPPDEBUG( format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
+		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
 		name = other.name;
 		pos = other.pos;
 		count++;
@@ -518,12 +518,12 @@ public:
 	bool operator!=( const InstanceCounter & other ) const
 	{
 		if( count != other.count ) {
-			CPPDEBUG( format( "%s:%s %s %d count is differtent", __FUNCTION__, pos, name, count ) );
+			CPPDEBUG( Tools::format( "%s:%s %s %d count is differtent", __FUNCTION__, pos, name, count ) );
 			return true;
 		}
 
 		if( name != other.name ) {
-			CPPDEBUG( format( "%s:%s %s %d name is different", __FUNCTION__, pos, name, count ) );
+			CPPDEBUG( Tools::format( "%s:%s %s %d name is different", __FUNCTION__, pos, name, count ) );
 			return true;
 		}
 
@@ -796,7 +796,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_list_insert12()
 
 							auto it = e.insert(++e.begin(),{ 1, 2, 3 });
 
-							CPPDEBUG( format( "%s %s" , typeid(e).name(), e ) );
+							CPPDEBUG( Tools::format( "%s %s" , typeid(e).name(), e ) );
 
 							// test if we have got back the correct it, so modify the value
 							// it points to
@@ -820,7 +820,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_list_insert13()
 							auto iterator_to_the_end = e.rbegin();
 							auto value_at_the_end = *e.rbegin();
 
-							CPPDEBUG( format( "%s %s ", typeid(e).name(), e ) );
+							CPPDEBUG( Tools::format( "%s %s ", typeid(e).name(), e ) );
 
 							auto it = e.insert(++e.begin(),{ 1, 2, 3 });
 
@@ -828,8 +828,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_list_insert13()
 							// it points to
 							*it = -1;
 
-							CPPDEBUG( format( "%s %s ", typeid(e).name(), e ) );
-							CPPDEBUG( format( "itend: %s == vend before: %s", *iterator_to_the_end, value_at_the_end ) );
+							CPPDEBUG( Tools::format( "%s %s ", typeid(e).name(), e ) );
+							CPPDEBUG( Tools::format( "itend: %s == vend before: %s", *iterator_to_the_end, value_at_the_end ) );
 
 							*iterator_to_the_end = -2;
 						}, v );
@@ -1116,7 +1116,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_list_reverse1()
 							*it_begin = -1;
 							*it_end = -2;
 
-							CPPDEBUG( format( "%s %s", typeid(e).name(), e ) );
+							CPPDEBUG( Tools::format( "%s %s", typeid(e).name(), e ) );
 				}, v );
 			});
 }
@@ -1186,7 +1186,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_list_unique1()
 							e = { 1, 1, 2, 2, 3, 3, 4, 5, 6, 6, 6, 4, 8, 6, 9, 9, 10 };
 							e.unique();
 
-							CPPDEBUG( format( "%s %s", typeid(e).name(), e ) );
+							CPPDEBUG( Tools::format( "%s %s", typeid(e).name(), e ) );
 				}, v );
 			});
 }
@@ -1201,7 +1201,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_list_unique2()
 							e = { 1, 1, 2, 2, 3, 3, 4, 5, 6, 6, 6, 4, 8, 6, 9, 9, 10 };
 							e.unique([]( const int & a, const int & b ) { return a == b; });
 
-							CPPDEBUG( format( "%s %s", typeid(e).name(), e ) );
+							CPPDEBUG( Tools::format( "%s %s", typeid(e).name(), e ) );
 				}, v );
 			});
 }

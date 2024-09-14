@@ -79,7 +79,7 @@ int main( int argc, char **argv )
 
 			idx++;
 
-			CPPDEBUG( format( "run test: %s", test->getName() ) );
+			CPPDEBUG( Tools::format( "run test: %s", test->getName() ) );
 
 			col.addColData( COL_IDX, format( "% 2d", idx ) );
 			col.addColData( COL_NAME, test->getName() );
@@ -110,7 +110,7 @@ int main( int argc, char **argv )
 #if __cpp_exceptions > 0
 			} catch( const std::exception & error ) {
 				result = "exception";
-				CPPDEBUG( format( "Error: %s", error.what() ));
+				CPPDEBUG( Tools::format( "Error: %s", error.what() ));
 			} catch( ... ) {
 				result = "exception";
 				CPPDEBUG( "Error" );
