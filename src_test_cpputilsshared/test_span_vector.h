@@ -26,6 +26,22 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_reserve1();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_reserve2();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_at1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_at2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_at3();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_operator_at1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_operator_at2();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_front1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_front2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_front3();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_back1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_back2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_back3();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_begin1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_begin2();
 
 #if 0
 

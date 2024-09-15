@@ -770,6 +770,22 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_span_vector_reserve2() );
 
 		test_cases.push_back( test_case_span_vector_at1() );
+		test_cases.push_back( test_case_span_vector_at2() );
+		test_cases.push_back( test_case_span_vector_at3() );
+
+		test_cases.push_back( test_case_span_vector_operator_at1() );
+		test_cases.push_back( test_case_span_vector_operator_at2() );
+
+		test_cases.push_back( test_case_span_vector_front1() );
+		test_cases.push_back( test_case_span_vector_front2() );
+		test_cases.push_back( test_case_span_vector_front3() );
+
+		test_cases.push_back( test_case_span_vector_back1() );
+		test_cases.push_back( test_case_span_vector_back2() );
+		test_cases.push_back( test_case_span_vector_back3() );
+
+		test_cases.push_back( test_case_span_vector_begin1() );
+		test_cases.push_back( test_case_span_vector_begin2() );
 
 		ColBuilder col;
 

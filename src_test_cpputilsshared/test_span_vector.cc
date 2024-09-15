@@ -137,8 +137,8 @@ struct TestEqualToVectorRet : public TestCaseBase<bool>
 	span_vector<T> c;
     std::vector<T> v;
 
-    TestEqualToVectorRet( const std::string & descr, Func func )
-	: TestCaseBase<bool>( descr, true, false ),
+    TestEqualToVectorRet( const std::string & descr, Func func, bool throws_exception = false )
+	: TestCaseBase<bool>( descr, true, throws_exception ),
 	  func( func ),
 	  c( data.data(), data.size() ),
 	  v()
@@ -178,7 +178,10 @@ std::shared_ptr<TestCaseBase<bool>> test_case_init_span_vector1()
 		std::array<char,10> a = { 'H', 'e', 'l', 'l', 'o', '\0' };
 		span_vector<char> v( a.data(), a.size(), a.size() );
 
-		return std::strcmp( a.data(), v.data() ) == 0;
+		// for testing data() const
+		const auto & v2 = v;
+
+		return std::strcmp( a.data(), v.data() ) == 0 && std::strcmp( a.data(), v2.data() ) == 0;
 	});
 }
 
@@ -388,6 +391,205 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_at1()
 		return c;
 	});
 }
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_at2()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			c = v.at(30);
+		}, v );
+
+		return c;
+	}, true );
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_at3()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			const auto vc = v;
+			c = vc.at(1);
+		}, v );
+
+		return c;
+	});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_operator_at1()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			c = v[1];
+		}, v );
+
+		return c;
+	});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_operator_at2()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			const auto vc = v;
+			c = vc[1];
+		}, v );
+
+		return c;
+	});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_front1()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			c = v.front();
+		}, v );
+
+		return c;
+	});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_front2()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			const auto vc = v;
+			c = vc.front();
+		}, v );
+
+		return c;
+	});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_front3()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a2 = {};
+		std::span<char> s2( a2 );
+		span_vector<char> v2( s2 );
+
+		// throws exception
+		v2.front();
+
+		return true;
+	}, true );
+}
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_back1()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			c = v.back();
+		}, v );
+
+		return c;
+	});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_back2()
+{
+	return std::make_shared<TestEqualToVectorRet<10,char,char>>(__FUNCTION__, []( auto & v ) -> char {
+
+		char c = '\0';
+
+		std::visit( [&c]( auto & v ) {
+			v = { 'H', 'e', 'l', 'l', 'o', '\0' };
+			const auto vc = v;
+			c = vc.back();
+		}, v );
+
+		return c;
+	});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_back3()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a2 = {};
+		std::span<char> s2( a2 );
+		span_vector<char> v2( s2 );
+
+		// throws exception
+		v2.back();
+
+		return true;
+	}, true );
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_begin1()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		auto il = { 'H', 'e', 'l', 'l', 'o', '\0' };
+
+		std::array<char,10> a2;
+		std::span<char> s2( a2 );
+		span_vector<char> v2( s2 );
+		v2 = il;
+
+		std::vector<char> v = il;
+
+		const auto & cv2 = v2;
+		const auto & cv = v;
+
+		return *v2.begin() == *v.begin() &&
+				*cv2.begin() == *cv.begin() &&
+				*v2.cbegin() == *v.cbegin();
+	}, false );
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_begin2()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a2;
+		std::span<char> s2( a2 );
+		span_vector<char> v2( s2 );
+
+		const auto & cv2 = v2;
+
+
+		return v2.begin() == v2.end() &&
+				cv2.begin() == cv2.end() &&
+				cv2.cbegin() == cv2.cend() &&
+				v2.cbegin() == cv2.cend();
+	}, false );
+}
+
 
 #if 0
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_vector1()

@@ -96,8 +96,9 @@ class TestCaseFuncNoInp : public TestCaseBase<bool>
 public:
 	TestCaseFuncNoInp( const std::string & name,
 			bool expected_result_,
-			Func func_ )
-	: TestCaseBase<bool>( name, expected_result_ ),
+			Func func_,
+			bool throws_exception = false )
+	: TestCaseBase<bool>( name, expected_result_, throws_exception ),
 	  func( func_ )
 	  {}
 
