@@ -7,6 +7,7 @@
 #include "test_static_vector.h"
 #include "test_static_list.h"
 #include "test_static_string.h"
+#include "test_span_vector.h"
 #include "ColoredOutput.h"
 #include "ColBuilder.h"
 #include <arg.h>
@@ -64,7 +65,7 @@ int main( int argc, char **argv )
 #endif
 
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
-
+/*
 		test_cases.push_back( test_case_toupper1() );
 		test_cases.push_back( test_case_toupper2() );
 		test_cases.push_back( test_case_toupper3() );
@@ -747,6 +748,28 @@ int main( int argc, char **argv )
 
 		test_cases.push_back( test_case_static_string_substr_1() );
 		test_cases.push_back( test_case_static_string_substr_2() );
+*/
+
+		test_cases.push_back( test_case_init_span_vector1() );
+		test_cases.push_back( test_case_init_span_vector2() );
+		test_cases.push_back( test_case_init_span_vector3() );
+
+		test_cases.push_back( test_case_span_vector_operator_assign1() );
+		test_cases.push_back( test_case_span_vector_operator_assign2() );
+		test_cases.push_back( test_case_span_vector_operator_assign3() );
+
+		test_cases.push_back( test_case_span_vector_assign1() );
+		test_cases.push_back( test_case_span_vector_assign2() );
+		test_cases.push_back( test_case_span_vector_assign3() );
+
+		test_cases.push_back( test_case_span_vector_size1() );
+
+		test_cases.push_back( test_case_span_vector_capacity1() );
+
+		test_cases.push_back( test_case_span_vector_reserve1() );
+		test_cases.push_back( test_case_span_vector_reserve2() );
+
+		test_cases.push_back( test_case_span_vector_at1() );
 
 		ColBuilder col;
 

@@ -87,4 +87,23 @@ public:
 		return func( input );
 	}
 };
+
+class TestCaseFuncNoInp : public TestCaseBase<bool>
+{
+	typedef std::function<bool()> Func;
+	Func func;
+
+public:
+	TestCaseFuncNoInp( const std::string & name,
+			bool expected_result_,
+			Func func_ )
+	: TestCaseBase<bool>( name, expected_result_ ),
+	  func( func_ )
+	  {}
+
+	bool run() override {
+		return func();
+	}
+};
+
 #endif /* TEST_TESTUTILS_H_ */

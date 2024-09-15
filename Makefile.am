@@ -39,6 +39,8 @@ test_cpputilsshared_SOURCES=\
 		src_test_cpputilsshared/test_static_list.cc \
 		src_test_cpputilsshared/test_static_string.h \
 		src_test_cpputilsshared/test_static_string.cc \
+		src_test_cpputilsshared/test_span_vector.cc \
+		src_test_cpputilsshared/test_span_vector.h \
 		tools_config.h
 		
 test_io_SOURCES=\
