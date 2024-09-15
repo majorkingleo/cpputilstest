@@ -47,23 +47,25 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_clear1();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert1();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert3();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert4();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert5();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert6();
 
-#if 0
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert7();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert8();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert9();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert10();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert11();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert12();
 
-std::shared_ptr<TestCaseBase<bool>> test_case_init_span_vector5();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert13();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert14();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert15();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert16();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert17();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert18();
 
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_vector1();
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_vector2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert19();
 
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_reverse_iterator();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert1();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert2();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert3();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert4();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert5();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert6();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert7();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert8();
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert9();
-#endif
 

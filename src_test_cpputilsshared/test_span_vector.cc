@@ -1,16 +1,15 @@
 /**
- * Testcases for cpputils/cpputilsshared/CyclicArray.h
- * @author Copyright (c) 2023 Martin Oberzalek
+ * Testcases for cpputils/cpputilsshared/span_vector.h
+ * @author Copyright (c) 2024 Martin Oberzalek
  */
-#include <span_vector.h>
 #include "test_static_vector.h"
 #include "ColoredOutput.h"
 #include <initializer_list>
 #include <variant>
 #include <CpputilsDebug.h>
-#include <format.h>
 #include <cstring>
 #include <vector>
+#include <format.h>
 
 #include <span_vector.h>
 
@@ -168,6 +167,48 @@ struct TestEqualToVectorRet : public TestCaseBase<bool>
     }
 };
 
+
+template <std::size_t N,class T,typename ret_type>
+struct TestInsert : public TestCaseBase<bool>
+{
+	using CONTAINER = std::variant<span_vector<T>,std::vector<T>>;
+	typedef std::function<ret_type(CONTAINER&)> Func;
+	Func func;
+
+	std::array<T,N> data;
+	span_vector<T> c;
+    std::vector<T> v;
+
+    TestInsert( const std::string & descr, Func func, bool throws_exception = false )
+	: TestCaseBase<bool>( descr, true, throws_exception ),
+	  func( func ),
+	  c( data.data(), data.size() ),
+	  v()
+	{}
+
+    bool run() override
+    {
+    	CONTAINER cc = c;
+    	CONTAINER cv = v;
+
+        auto ret1 = func( cc );
+        auto ret2 = func( cv );
+
+        if( ret1 != ret2 || std::get<0>(cc) != std::get<1>(cv) ) {
+        	CPPDEBUG( Tools::format( "FAILED: '%s' {%d}(span_vector<%d>) ret: %d != %d '%s' {%d}(vector)",
+        			std::get<0>(cc),
+					std::get<0>(cc).size(),
+					N,
+					ret1,
+					ret2,
+					std::get<1>(cv),
+					std::get<1>(cv).size() ) );
+        	return false;
+        }
+
+        return true;
+    }
+};
 
 } // namespace
 
@@ -679,94 +720,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert2()
 }
 
 
-#if 0
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_vector1()
-{
-	return std::make_shared<TestEqualToVector<int,10>>(__FUNCTION__,
-			[]( auto & v ) {
-				std::visit(
-						[](auto & e){
-							e.erase(e.begin());
-						}, v );
-			});
-}
-
-
-std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_vector2()
-{
-	return std::make_shared<TestEqualToVector<int,10>>(__FUNCTION__,
-			[]( auto & v ) {
-				std::visit(
-						[](auto & e){
-							e.erase(e.begin()+3);
-						}, v );
-			});
-}
-
-namespace {
-
-class TestReverseIterator : public TestCaseBase<bool>
-{
-public:
-	TestReverseIterator( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
-
-	bool run() override {
-		static_vector<int,10> c({ 1, 2, 3, 4, 5 });
-		std::vector<int> v({ 1, 2, 3, 4, 5 });
-
-		if( *c.rbegin() != *v.rbegin() ) {
-			return false;
-		}
-
-		if( *(--c.rend()) != *(--v.rend()) ) {
-			return false;
-		}
-
-		return true;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_reverse_iterator()
-{
-	return std::make_shared<TestReverseIterator>(__FUNCTION__);
-}
-
-
-
-namespace {
-
-class TestInsert2 : public TestCaseBase<bool>
-{
-public:
-	TestInsert2( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
-
-	bool run() override {
-		static_vector<int,10> c({ 1, 2, 3, 4, 5 });
-		std::vector<int> v({ 1, 2, 3, 4, 5 });
-
-		c.insert(c.begin()+2,-1);
-		v.insert(v.begin()+2,-1);
-
-		CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
-
-		return c == v;;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert2()
-{
-	return std::make_shared<TestInsert2>(__FUNCTION__);
-}
-
-
 namespace {
 
 class TestInsert3 : public TestCaseBase<bool>
@@ -777,8 +730,15 @@ public:
 	{}
 
 	bool run() override {
-		static_vector<int,10> c({ 1, 2, 3, 4, 5 });
-		std::vector<int> v({ 1, 2, 3, 4, 5 });
+		auto il = { 1, 2, 3, 4, 5 };
+
+		std::array<int,10> a;
+		std::span<int> s(a);
+		span_vector<int> c(s);
+		std::vector<int> v;
+
+		v.assign(il);
+		c.assign(il);
 
 		c.insert(c.begin(),-1);
 		v.insert(v.begin(),-1);
@@ -791,247 +751,296 @@ public:
 
 } // namespace
 
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert3()
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert3()
 {
 	return std::make_shared<TestInsert3>(__FUNCTION__);
 }
 
-namespace {
-
-class InstanceCounter
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert4()
 {
-	std::string name;
-	std::string pos;
-	unsigned count = 0;
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
 
-public:
-	InstanceCounter( const std::string & name = "x", const std::string & pos = "x" )
-	: name( name ),
-	  pos(pos)
-	{
-	}
+							ret = *(e.insert(e.cend(),-1));
+						}, v );
 
-	InstanceCounter( const InstanceCounter & other )
-	: name( other.name ),
-	  pos(other.pos),
-	  count( other.count + 1 )
-	{
-		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
-	}
-
-	InstanceCounter( InstanceCounter && other )
-	: name( other.name ),
-	  pos(other.pos),
-	  count( other.count )
-	{
-		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
-	}
-
-	~InstanceCounter() {
-		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
-	}
-
-	const InstanceCounter & operator=( const InstanceCounter & other )
-	{
-		CPPDEBUG( Tools::format( "%s:%s %s %d", __FUNCTION__, pos, name, count ) );
-		name = other.name;
-		pos = other.pos;
-		count++;
-		return *this;
-	}
-
-	bool operator!=( const InstanceCounter & other ) const
-	{
-		if( count != other.count ) {
-			CPPDEBUG( Tools::format( "%s:%s %s %d count is differtent", __FUNCTION__, pos, name, count ) );
-			return true;
-		}
-
-		if( name != other.name ) {
-			CPPDEBUG( Tools::format( "%s:%s %s %d name is different", __FUNCTION__, pos, name, count ) );
-			return true;
-		}
-
-		return false;
-	}
-};
-
-class TestInsert4 : public TestCaseBase<bool>
-{
-public:
-	TestInsert4( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
-
-	bool run() override {
-		static_vector<InstanceCounter,10> c;
-		std::vector<InstanceCounter> v;
-
-		//CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
-
-		return c == v;
-	}
-};
-
-} // namespace
-
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert4()
-{
-	return std::make_shared<TestInsert4>(__FUNCTION__);
+				return ret;
+			});
 }
 
-namespace {
-
-class TestInsert5 : public TestCaseBase<bool>
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert5()
 {
-public:
-	TestInsert5( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
 
-	bool run() override {
-		static_vector<InstanceCounter,10> c;
-		std::vector<InstanceCounter> v;
-		v.reserve(10);
+		std::array<char,1> a2;
+		std::span<char> s2( a2 );
+		span_vector<char> v2( s2 );
 
-		c.push_back(InstanceCounter("a", "c"));
-		c.insert(c.begin(),InstanceCounter("b", "c"));
+		v2.insert(v2.begin(),1);
+		v2.insert(v2.begin(),2); // should throw
 
-		v.push_back(InstanceCounter("a", "v"));
-		v.insert(v.begin(),InstanceCounter("b", "v"));
-
-		//CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
-
-		return c == v;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert5()
-{
-	return std::make_shared<TestInsert5>(__FUNCTION__);
+		return true;
+	}, true );
 }
 
-namespace {
-
-class TestInsert6 : public TestCaseBase<bool>
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert6()
 {
-public:
-	TestInsert6( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
+	return std::make_shared<TestInsert<10,std::string,std::string>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::string ret;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<std::string> il { std::string("1"), std::string("2"), std::string("3"), std::string("4") };
+							e.assign(il.begin(), il.end());
 
-	bool run() override {
-		static_vector<int,10> c;
-		std::vector<int> v { 1, 2, 3, 4, 5 };
-		v.reserve(10);
+							ret = *(e.insert(e.begin()+2,std::move(std::string("hello"))));
+						}, v );
 
-		c = v;
+				return ret;
+			});
+}
 
-		//CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
-
-		return c == v;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert6()
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert7()
 {
-	return std::make_shared<TestInsert6>(__FUNCTION__);
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
+
+							ret = *(e.insert(e.cend(), 3,-1));
+						}, v );
+
+				return ret;
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert8()
+{
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							ret = *(e.insert(e.cend(), 3,-1));
+						}, v );
+
+				return ret;
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert9()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,2> a2;
+		std::span<char> s2( a2 );
+		span_vector<char> v2( s2 );
+
+		v2.insert(v2.cend(), 3,-1);
+
+		return true;
+	}, true );
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert10()
+{
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
+							ret = *(e.insert(e.begin()+1, 3,-1));
+						}, v );
+
+				return ret;
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert11()
+{
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
+							ret = *(e.insert(e.begin()+3, 3,-1));
+						}, v );
+
+				return ret;
+			});
 }
 
 
-namespace {
-
-class TestInsert7 : public TestCaseBase<bool>
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert12()
 {
-public:
-	TestInsert7( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
+	return std::make_shared<TestInsert<20,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5, 6, 7, 8, 9, 10 };
+							e.assign(il.begin(), il.end());
+							ret = *(e.insert(e.begin()+3, 4,-1));
+						}, v );
 
-	bool run() override {
-		static_vector<int,10> c;
-		std::pmr::vector<int> v { 1, 2, 3, 4, 5 };
-		v.reserve(10);
-
-		c = v;
-
-		//CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
-
-		return c == v;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert7()
-{
-	return std::make_shared<TestInsert7>(__FUNCTION__);
-}
-
-
-namespace {
-
-class TestInsert8 : public TestCaseBase<bool>
-{
-public:
-	TestInsert8( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
-
-	bool run() override {
-		static_vector<int,10> c { 1, 2, 3, 4, 5 };
-		std::pmr::vector<int> v;
-		v.reserve(10);
-
-		v = c;
-
-		//CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
-
-		return c == v;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert8()
-{
-	return std::make_shared<TestInsert8>(__FUNCTION__);
+				return ret;
+			});
 }
 
 
 
-namespace {
 
-class TestInsert9 : public TestCaseBase<bool>
+
+
+
+
+
+
+
+
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert13()
 {
-public:
-	TestInsert9( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
 
-	bool run() override {
-		static_vector<int,10> c { 1, 2, 3, 4, 5 };
-		std::vector<int> v;
-		v.reserve(10);
+							std::initializer_list<int> ins { -1, -2, -3 };
 
-		v = c;
+							ret = *(e.insert(e.cend(), ins.begin(), ins.end() ));
+						}, v );
 
-		//CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
-
-		return c == v;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert9()
-{
-	return std::make_shared<TestInsert9>(__FUNCTION__);
+				return ret;
+			});
 }
 
-#endif
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert14()
+{
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+
+							std::initializer_list<int> ins { -1, -2, -3 };
+
+							ret = *(e.insert(e.cend(), ins.begin(), ins.end() ));
+						}, v );
+
+				return ret;
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert15()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,2> a2;
+		std::span<char> s2( a2 );
+		span_vector<char> v2( s2 );
+
+		std::initializer_list<int> ins { -1, -2, -3 };
+
+		v2.insert(v2.cend(), ins.begin(), ins.end() );
+
+		return true;
+	}, true );
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert16()
+{
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
+
+							std::initializer_list<int> ins { -1, -2, -3 };
+
+							ret = *(e.insert(e.begin()+1, ins.begin(), ins.end() ));
+						}, v );
+
+				return ret;
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert17()
+{
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
+
+							std::initializer_list<int> ins { -1, -2, -3 };
+
+							ret = *(e.insert(e.begin()+3, ins.begin(), ins.end() ));
+						}, v );
+
+				return ret;
+			});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert18()
+{
+	return std::make_shared<TestInsert<20,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5, 6, 7, 8, 9, 10 };
+							e.assign(il.begin(), il.end());
+
+							std::initializer_list<int> ins { -1, -2, -3, -4 };
+
+							ret = *(e.insert(e.begin()+3, ins.begin(), ins.end() ));
+						}, v );
+
+				return ret;
+			});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert19()
+{
+	return std::make_shared<TestInsert<20,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5, 6, 7, 8, 9, 10 };
+							e.assign(il.begin(), il.end());
+
+							std::initializer_list<int> ins { -1, -2, -3, -4 };
+
+							ret = *(e.insert(e.begin()+3, ins ));
+						}, v );
+
+				return ret;
+			});
+}
+
+
+
