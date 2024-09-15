@@ -43,6 +43,11 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_back3();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_begin1();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_begin2();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_clear1();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert2();
+
 #if 0
 
 std::shared_ptr<TestCaseBase<bool>> test_case_init_span_vector5();

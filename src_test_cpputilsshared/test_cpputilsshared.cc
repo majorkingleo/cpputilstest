@@ -787,6 +787,11 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_span_vector_begin1() );
 		test_cases.push_back( test_case_span_vector_begin2() );
 
+		test_cases.push_back( test_case_span_vector_clear1() );
+
+		test_cases.push_back( test_case_span_vector_insert1() );
+		test_cases.push_back( test_case_span_vector_insert2() );
+
 		ColBuilder col;
 
 		const int COL_IDX 		= col.addCol( "Idx" );

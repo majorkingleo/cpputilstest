@@ -591,6 +591,94 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_begin2()
 }
 
 
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_clear1()
+{
+	return std::make_shared<TestEqualToVector<int,10>>(__FUNCTION__,
+			[]( auto & v ) {
+				std::visit(
+						[](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+							e.assign(il.begin(), il.end());
+							e.clear();
+						}, v );
+			});
+}
+
+namespace {
+
+class TestInsert1 : public TestCaseBase<bool>
+{
+public:
+	TestInsert1( const std::string & descr )
+	: TestCaseBase<bool>( descr, true, false )
+	{}
+
+	bool run() override {
+
+		auto il = { 1, 2, 3, 4, 5 };
+
+		std::array<int,10> a;
+		std::span<int> s(a);
+		span_vector<int> c(s);
+		std::vector<int> v;
+
+		v.assign(il);
+		c.assign(il);
+
+		v.insert(v.end(),-1);
+		c.insert(c.end(),-1);
+
+		CPPDEBUG( Tools::format( "c: %s v: %s", c, v ) );
+
+		return c == v;;
+	}
+};
+
+} // namespace
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert1()
+{
+	return std::make_shared<TestInsert1>(__FUNCTION__);
+}
+
+namespace {
+
+class TestInsert2 : public TestCaseBase<bool>
+{
+public:
+	TestInsert2( const std::string & descr )
+	: TestCaseBase<bool>( descr, true, false )
+	{}
+
+	bool run() override {
+
+		auto il = { 1, 2, 3, 4, 5 };
+
+		std::array<int,10> a;
+		std::span<int> s(a);
+		span_vector<int> c(s);
+		std::vector<int> v;
+
+		v.assign(il);
+		c.assign(il);
+
+		c.insert(c.begin()+2,-1);
+		v.insert(v.begin()+2,-1);
+
+		CPPDEBUG( Tools::format("v: %s c: %s", v, c ) );
+
+		return c == v;;
+	}
+};
+
+} // namespace
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert2()
+{
+	return std::make_shared<TestInsert2>(__FUNCTION__);
+}
+
+
 #if 0
 std::shared_ptr<TestCaseBase<bool>> test_case_modify_static_vector1()
 {
@@ -647,34 +735,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_reverse_iterator()
 	return std::make_shared<TestReverseIterator>(__FUNCTION__);
 }
 
-namespace {
 
-class TestInsert1 : public TestCaseBase<bool>
-{
-public:
-	TestInsert1( const std::string & descr )
-	: TestCaseBase<bool>( descr, true, false )
-	{}
-
-	bool run() override {
-		static_vector<int,10> c({ 1, 2, 3, 4, 5 });
-		std::vector<int> v({ 1, 2, 3, 4, 5 });
-
-		v.insert(v.end(),-1);
-		c.insert(c.end(),-1);
-
-		CPPDEBUG( Tools::format( "c: %s v: %s", c, v ) );
-
-		return c == v;;
-	}
-};
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_static_vector_insert1()
-{
-	return std::make_shared<TestInsert1>(__FUNCTION__);
-}
 
 namespace {
 
