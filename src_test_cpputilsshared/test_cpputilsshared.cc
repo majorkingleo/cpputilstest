@@ -811,6 +811,20 @@ int main( int argc, char **argv )
 
 		test_cases.push_back( test_case_span_vector_insert19() );
 
+		test_cases.push_back( test_case_span_vector_erase1() );
+		test_cases.push_back( test_case_span_vector_erase2() );
+		test_cases.push_back( test_case_span_vector_erase3() );
+		test_cases.push_back( test_case_span_vector_erase4() );
+		test_cases.push_back( test_case_span_vector_erase5() );
+		test_cases.push_back( test_case_span_vector_erase6() );
+
+
+		test_cases.push_back( test_case_span_vector_erase7() );
+		test_cases.push_back( test_case_span_vector_erase8() );
+		test_cases.push_back( test_case_span_vector_erase9() );
+		//test_cases.push_back( test_case_span_vector_erase10() );
+		//test_cases.push_back( test_case_span_vector_erase11() );
+		//test_cases.push_back( test_case_span_vector_erase12() );
 
 		ColBuilder col;
 

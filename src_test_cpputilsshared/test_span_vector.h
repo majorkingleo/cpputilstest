@@ -68,4 +68,20 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert18();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert19();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase3();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase4();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase5();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase6();
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase7();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase8();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase9();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase10();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase11();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase12();
+
+
 
