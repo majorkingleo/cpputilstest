@@ -822,9 +822,25 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_span_vector_erase7() );
 		test_cases.push_back( test_case_span_vector_erase8() );
 		test_cases.push_back( test_case_span_vector_erase9() );
-		//test_cases.push_back( test_case_span_vector_erase10() );
-		//test_cases.push_back( test_case_span_vector_erase11() );
-		//test_cases.push_back( test_case_span_vector_erase12() );
+
+		test_cases.push_back( test_case_span_vector_push_back1() );
+		test_cases.push_back( test_case_span_vector_push_back2() );
+		test_cases.push_back( test_case_span_vector_push_back3() );
+
+		test_cases.push_back( test_case_span_vector_pop_back1() );
+		test_cases.push_back( test_case_span_vector_pop_back2() );
+
+		test_cases.push_back( test_case_span_vector_resize1() );
+		test_cases.push_back( test_case_span_vector_resize2() );
+		test_cases.push_back( test_case_span_vector_resize3() );
+
+		test_cases.push_back( test_case_span_vector_resize4() );
+		test_cases.push_back( test_case_span_vector_resize5() );
+		test_cases.push_back( test_case_span_vector_resize6() );
+
+		test_cases.push_back( test_case_span_vector_swap1() );
+		test_cases.push_back( test_case_span_vector_swap2() );
+		test_cases.push_back( test_case_span_vector_swap3() );
 
 		ColBuilder col;
 

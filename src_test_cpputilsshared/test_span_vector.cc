@@ -1193,3 +1193,244 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase9()
 }
 
 
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back1()
+{
+	return std::make_shared<TestInsert<20,int,int>>(__FUNCTION__,
+		[]( auto & v ) {
+			int ret = 0;
+			std::visit(
+					[&ret](auto & e){
+						std::initializer_list<int> il { 1, 2, 3, 4 ,5, 6, 7, 8, 9, 10 };
+						e.assign(il.begin(), il.end());
+
+						e.push_back( 88 );
+						e.push_back( 88 );
+
+						ret = e.size();
+					}, v );
+
+			return ret;
+		});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back2()
+{
+	return std::make_shared<TestInsert<10,int,int>>(__FUNCTION__,
+		[]( auto & v ) {
+			int ret = 0;
+			std::visit(
+					[&ret](auto & e){
+						std::initializer_list<int> il { 1, 2, 3, 4 ,5, 6, 7, 8, 9, 10 };
+						e.assign(il.begin(), il.end());
+
+						// should throw
+						e.push_back( 88 );
+						e.push_back( 88 );
+
+						ret = e.size();
+					}, v );
+
+			return ret;
+		}, true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back3()
+{
+	return std::make_shared<TestInsert<20,std::string,int>>(__FUNCTION__,
+		[]( auto & v ) {
+			int ret = 0;
+			std::visit(
+					[&ret](auto & e){
+
+						std::initializer_list<std::string> il { "1", "2", "3", "4" };
+						e.assign(il.begin(), il.end());
+
+						e.push_back( std::string("x") );
+						e.push_back( std::move( std::string("Y" ) ) );
+						e.push_back( "Z" );
+
+						ret = e.size();
+					}, v );
+
+			return ret;
+		});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_pop_back1()
+{
+	return std::make_shared<TestInsert<20,std::string,int>>(__FUNCTION__,
+		[]( auto & v ) {
+			int ret = 0;
+			std::visit(
+					[&ret](auto & e){
+
+						std::initializer_list<std::string> il { "1", "2", "3", "4" };
+						e.assign(il.begin(), il.end());
+
+						e.pop_back();
+
+						ret = e.size();
+					}, v );
+
+			return ret;
+		});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_pop_back2()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a = { 'H', 'e', 'l', 'l', 'o', '\0' };
+		span_vector<char> v( a.data(), a.size() );
+
+		if( !v.empty() ) {
+			return false;
+		}
+
+		v.pop_back();
+
+		if( !v.empty() ) {
+			return false;
+		}
+
+		return true;
+	});
+}
+
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize1()
+{
+	return std::make_shared<TestEqualToVector<int,10>>(__FUNCTION__,
+		[]( auto & v ) {
+			std::visit(
+				[](auto & e){
+					std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+					e.resize(8);
+				}, v );
+		});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize2()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a = { 'H', 'e', 'l', 'l', 'o', '\0' };
+		span_vector<char> v( a.data(), a.size() );
+
+		v.resize(20);
+
+		return true;
+	}, true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize3()
+{
+	return std::make_shared<TestEqualToVector<int,10>>(__FUNCTION__,
+		[]( auto & v ) {
+			std::visit(
+				[](auto & e){
+					std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+					e.resize(2);
+				}, v );
+		});
+}
+
+
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize4()
+{
+	return std::make_shared<TestEqualToVector<int,10>>(__FUNCTION__,
+		[]( auto & v ) {
+			std::visit(
+				[](auto & e){
+					std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+					e.resize(8,-1);
+				}, v );
+		});
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize5()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a = { 'H', 'e', 'l', 'l', 'o', '\0' };
+		span_vector<char> v( a.data(), a.size() );
+
+		v.resize(20,-1);
+
+		return true;
+	}, true);
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize6()
+{
+	return std::make_shared<TestEqualToVector<int,10>>(__FUNCTION__,
+		[]( auto & v ) {
+			std::visit(
+				[](auto & e){
+					std::initializer_list<int> il { 1, 2, 3, 4 ,5 };
+					e.resize(2,-1);
+				}, v );
+		});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_swap1()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a1 = { 'H', 'e', 'l', 'l', 'o', '\0' };
+		span_vector<char> v1( a1.data(), a1.size(), a1.size() );
+
+		std::array<char,10> a2 = { 'x', 'x', 'x', '\0' };
+		span_vector<char> v2( a2.data(), a2.size(), a2.size() );
+
+		v1.swap(v2);
+
+		return std::strcmp( v1.data(), a2.data() ) == 0 &&
+			   std::strcmp( v2.data(), a1.data() ) == 0;
+	});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_swap2()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a1 = { 'H', 'e', 'l', 'l', 'o', '\0' };
+		span_vector<char> v1( a1.data(), a1.size(), a1.size() );
+
+		span_vector<char> v2( a1.data(), a1.size(), a1.size() );
+
+		v1.swap(v2);
+
+		return std::strcmp( v1.data(), a1.data() ) == 0 &&
+			   std::strcmp( v1.data(), a1.data() ) == 0;
+	});
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_swap3()
+{
+	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
+
+		std::array<char,10> a1 = { 'H', 'e', 'l', 'l', 'o', '\0' };
+		span_vector<char> v1( a1.data(), a1.size(), a1.size() );
+
+		span_vector<char> v2 = v1;
+
+		v1.swap(v2);
+
+		return std::strcmp( v1.data(), a1.data() ) == 0 &&
+			   std::strcmp( v1.data(), a1.data() ) == 0;
+	});
+}

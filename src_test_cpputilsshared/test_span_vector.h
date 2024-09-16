@@ -79,9 +79,25 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase6();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase7();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase8();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase9();
-std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase10();
-std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase11();
-std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase12();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back3();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_pop_back1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_pop_back2();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize3();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize4();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize5();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_resize6();
+
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_swap1();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_swap2();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_swap3();
 
 
 
