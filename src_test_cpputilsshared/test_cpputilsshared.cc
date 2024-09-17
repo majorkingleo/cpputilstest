@@ -855,6 +855,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_string_adapter_replace_1() );
 		test_cases.push_back( test_case_string_adapter_replace_2() );
 		test_cases.push_back( test_case_string_adapter_replace_3() );
+		test_cases.push_back( test_case_string_adapter_replace_4() );
 
 		ColBuilder col;
 

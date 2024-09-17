@@ -2,12 +2,13 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
+#include <arg.h>
 
 std::string demangle( const std::string & name );
 
 #include "static_format.h"
 #include <ColoredOutput.h>
-
+#include <OutDebug.h>
 
 #include <cxxabi.h>
 
@@ -90,6 +91,43 @@ void add( T&& ...t )
 #endif
 int main( int argc, char **argv )
 {
+
+	Arg::Arg arg( argc, argv );
+	arg.addPrefix( "-" );
+	arg.addPrefix( "--" );
+
+	Arg::OptionChain oc_info;
+	arg.addChainR(&oc_info);
+	oc_info.setMinMatch(1);
+	oc_info.setContinueOnMatch( false );
+	oc_info.setContinueOnFail( true );
+
+	Arg::FlagOption o_help( "help" );
+	o_help.setDescription( "Show this page" );
+	oc_info.addOptionR( &o_help );
+
+	Arg::FlagOption o_debug("d");
+	o_debug.addName( "debug" );
+	o_debug.setDescription("print debugging messages");
+	o_debug.setRequired(false);
+	arg.addOptionR( &o_debug );
+
+	if( !arg.parse() )
+	{
+		std::cout << arg.getHelp(5,20,30, 80 ) << std::endl;
+		return 1;
+	}
+
+	if( o_debug.getState() )
+	{
+		Tools::x_debug = new OutDebug();
+	}
+
+	if( o_help.getState() ) {
+		std::cout << arg.getHelp(5,20,30, 80 ) << std::endl;
+		return 1;
+	}
+
  // minimal_init( argc, argv, "", false, true );
 
   char buffer[250];
@@ -142,6 +180,7 @@ int main( int argc, char **argv )
   std::cout << static_format<20> ("%.3s", 1 ) << std::endl;
   std::cout << static_format<20> ("%.3s", std::string("x") ) << std::endl;
   std::cout << static_format<20> ("%.3s", "x" ) << std::endl;
+  std::cout << static_format<40>( "P: %d %d%%; ", 1, 2 ) << std::endl;
 
 #if 1
 #if __cpp_exceptions > 0

@@ -29,6 +29,7 @@ std::ostream & operator<<( std::ostream & out, const string_t & s )
 	return out;
 }
 
+
 } // namespace std
 
 
@@ -193,6 +194,17 @@ std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_3()
 		std::visit( []( auto & s ) {
 			s = "Hello";
 			s.replace( 2, 2, "xxxxxxx" );
+		}, v);
+		return true;
+	}, false );
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_4()
+{
+	return std::make_shared<TestEqualToString<20,bool>>(__FUNCTION__, []( auto & v ) {
+		std::visit( []( auto & s ) {
+			s = "%%";
+			s.replace( 0, 2, "%" );
 		}, v);
 		return true;
 	}, false );
