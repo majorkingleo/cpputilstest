@@ -25,8 +25,6 @@ test_wformat_SOURCES=\
 		
 test_static_format_SOURCES=\
 		src_test_format/test_static_format.cc \
-		src_test_format/static_format.h \
-		src_test_format/static_format.cc \
 		tools_config.h
 
 test_cpputilsshared_SOURCES=\
@@ -113,8 +111,8 @@ cpputils_cpputilsshared_libcpputilsshared_a_SOURCES= \
 		cpputils/cpputilsshared/CyclicArray.h \
 		cpputils/cpputilsshared/static_vector.h \
 		cpputils/cpputilsshared/static_list.h \
-		cpputils/cpputilsshared/static_string.h
-
+		cpputils/cpputilsshared/static_string.h \
+		cpputils/cpputilsshared/string_adapter.h
 
 cpputils_cpputilsshared_cpputilsformat_libcpputilsformat_a_SOURCES= \
 	cpputils/cpputilsshared/cpputilsformat/format.h \
@@ -126,7 +124,10 @@ cpputils_cpputilsshared_cpputilsformat_libcpputilsformat_a_SOURCES= \
 	cpputils/cpputilsshared/cpputilsformat/wformat2.cc \
 	cpputils/cpputilsshared/cpputilsformat/wformat2.h \
 	cpputils/cpputilsshared/cpputilsformat/cwformat.h \
-	cpputils/cpputilsshared/cpputilsformat/cwformat.cc
+	cpputils/cpputilsshared/cpputilsformat/cwformat.cc \
+	cpputils/cpputilsshared/cpputilsformat/static_format.h \
+	cpputils/cpputilsshared/cpputilsformat/static_format.cc
+	
 	
 	
 	
