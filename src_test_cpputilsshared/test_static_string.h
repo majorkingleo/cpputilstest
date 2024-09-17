@@ -381,4 +381,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_operator_8();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_static_string_ostream_1();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_via_adapter1();
+
 #endif /* SRC_TEST_CPPUTILSSHARED_TEST_STATIC_VECTOR_H_ */

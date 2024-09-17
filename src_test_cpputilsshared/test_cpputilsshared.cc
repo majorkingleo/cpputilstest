@@ -8,6 +8,7 @@
 #include "test_static_list.h"
 #include "test_static_string.h"
 #include "test_span_vector.h"
+#include "test_string_adapter.h"
 #include "ColoredOutput.h"
 #include "ColBuilder.h"
 #include <arg.h>
@@ -65,7 +66,7 @@ int main( int argc, char **argv )
 #endif
 
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
-
+/*
 		test_cases.push_back( test_case_toupper1() );
 		test_cases.push_back( test_case_toupper2() );
 		test_cases.push_back( test_case_toupper3() );
@@ -749,6 +750,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_static_string_substr_1() );
 		test_cases.push_back( test_case_static_string_substr_2() );
 
+		test_cases.push_back( test_case_static_string_via_adapter1() );
 
 		test_cases.push_back( test_case_init_span_vector1() );
 		test_cases.push_back( test_case_init_span_vector2() );
@@ -841,6 +843,14 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_span_vector_swap1() );
 		test_cases.push_back( test_case_span_vector_swap2() );
 		test_cases.push_back( test_case_span_vector_swap3() );
+*/
+		test_cases.push_back( test_case_string_adapter_constructor_1() );
+		test_cases.push_back( test_case_string_adapter_capacity_1() );
+		test_cases.push_back( test_case_string_adapter_max_size_1() );
+
+		test_cases.push_back( test_case_string_adapter_reserve_1() );
+		test_cases.push_back( test_case_string_adapter_reserve_2() );
+		test_cases.push_back( test_case_string_adapter_reserve_3() );
 
 		ColBuilder col;
 

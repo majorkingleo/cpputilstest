@@ -10,6 +10,7 @@
 #include <CpputilsDebug.h>
 #include <format.h>
 #include <sstream>
+#include <span_vector.h>
 
 using namespace Tools;
 
@@ -5495,4 +5496,22 @@ std::shared_ptr<TestCaseBase<bool>> test_case_static_string_ostream_1()
 
 				return str.str();
 			});
+}
+
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_static_string_via_adapter1()
+{
+	return std::make_shared<TestBool>(__FUNCTION__,
+		[]() {
+			 std::array<char,20> abuffer;
+			 std::span<char> sbuffer( abuffer.data(), abuffer.size() );
+			 using span_string_adapter = Tools::static_basic_string<20,char,static_string_out_of_range_cut,Tools::span_vector<char>>;
+
+			 span_string_adapter ss( sbuffer );
+
+			 ss = "hello";
+
+			 return ss == std::string_view("hello");
+		});
 }
