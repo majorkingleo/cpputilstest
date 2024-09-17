@@ -15,6 +15,70 @@
 
 using namespace Tools;
 
+using string_t = basic_string_adapter<char,span_vector<char>>;
+
+namespace std {
+std::ostream & operator<<( std::ostream & out, const string_t & s )
+{
+	out << "[" << s.size() << "]";
+
+	out << "{";
+	out << std::string_view(s);
+	out << "}";
+
+	return out;
+}
+
+} // namespace std
+
+
+namespace {
+
+template <std::size_t N, typename ret_type>
+struct TestEqualToString : public TestCaseBase<bool>
+{
+	using CONTAINER = std::variant<string_t,std::string>;
+	typedef std::function<ret_type(CONTAINER&)> Func;
+	Func func;
+
+	TestEqualToString( const std::string & descr, Func func, bool throws_exception = false )
+	: TestCaseBase<bool>( descr, true, throws_exception ),
+	  func( func )
+	{}
+
+    bool run() override
+    {
+
+    	std::array<char,N> data;
+    	span_vector<char> sv(data.data(),data.size());
+    	string_t c( sv );
+    	std::string v;
+
+    	CONTAINER cc = c;
+    	CONTAINER cv = v;
+
+        auto ret1 = func( cc );
+        auto ret2 = func( cv );
+
+        if( ret1 != ret2 ) {
+        	CPPDEBUG( Tools::format( "FAILED: '%s' {%d}(span_vector<%d>) ret: %d != %d '%s' {%d}(vector)",
+        			std::get<0>(cc),
+					std::get<0>(cc).size(),
+					N,
+					ret1,
+					ret2,
+					std::get<1>(cv),
+					std::get<1>(cv).size() ) );
+        	return false;
+        }
+
+        return true;
+    }
+};
+
+
+} // namespace
+
 std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_constructor_1()
 {
 	return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
@@ -97,5 +161,40 @@ std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_reserve_3()
 
 		return true;
 	}, true );
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_1()
+{
+	return std::make_shared<TestEqualToString<20,bool>>(__FUNCTION__, []( auto & v ) {
+		std::visit( []( auto & s ) {
+			s = "Hello";
+			s.replace( 2, 2, "xx" );
+		}, v);
+		return true;
+	}, false );
+}
+
+std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_2()
+{
+	return std::make_shared<TestEqualToString<20,bool>>(__FUNCTION__, []( auto & v ) {
+		std::visit( []( auto & s ) {
+			s = "Hello";
+			s.replace( 2, 2, "x" );
+		}, v);
+		return true;
+	}, false );
+}
+
+
+std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_3()
+{
+	return std::make_shared<TestEqualToString<20,bool>>(__FUNCTION__, []( auto & v ) {
+		std::visit( []( auto & s ) {
+			s = "Hello";
+			s.replace( 2, 2, "xxxxxxx" );
+		}, v);
+		return true;
+	}, false );
 }
 

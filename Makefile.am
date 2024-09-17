@@ -25,6 +25,8 @@ test_wformat_SOURCES=\
 		
 test_static_format_SOURCES=\
 		src_test_format/test_static_format.cc \
+		src_test_format/static_format.h \
+		src_test_format/static_format.cc \
 		tools_config.h
 
 test_cpputilsshared_SOURCES=\
@@ -41,6 +43,8 @@ test_cpputilsshared_SOURCES=\
 		src_test_cpputilsshared/test_static_string.cc \
 		src_test_cpputilsshared/test_span_vector.cc \
 		src_test_cpputilsshared/test_span_vector.h \
+		src_test_cpputilsshared/test_string_adapter.cc \
+		src_test_cpputilsshared/test_string_adapter.h \
 		tools_config.h
 		
 test_io_SOURCES=\

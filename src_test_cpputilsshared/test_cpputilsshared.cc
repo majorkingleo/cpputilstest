@@ -852,6 +852,10 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_string_adapter_reserve_2() );
 		test_cases.push_back( test_case_string_adapter_reserve_3() );
 
+		test_cases.push_back( test_case_string_adapter_replace_1() );
+		test_cases.push_back( test_case_string_adapter_replace_2() );
+		test_cases.push_back( test_case_string_adapter_replace_3() );
+
 		ColBuilder col;
 
 		const int COL_IDX 		= col.addCol( "Idx" );

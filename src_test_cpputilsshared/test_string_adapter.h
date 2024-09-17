@@ -20,3 +20,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_reserve_1();
 std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_reserve_2();
 std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_reserve_3();
 
+std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_1();
+std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_2();
+std::shared_ptr<TestCaseBase<bool>> test_case_string_adapter_replace_3();
+
