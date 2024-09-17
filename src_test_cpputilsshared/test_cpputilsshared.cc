@@ -66,7 +66,7 @@ int main( int argc, char **argv )
 #endif
 
 		std::vector<std::shared_ptr<TestCaseBase<bool>>> test_cases;
-/*
+
 		test_cases.push_back( test_case_toupper1() );
 		test_cases.push_back( test_case_toupper2() );
 		test_cases.push_back( test_case_toupper3() );
@@ -843,7 +843,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_span_vector_swap1() );
 		test_cases.push_back( test_case_span_vector_swap2() );
 		test_cases.push_back( test_case_span_vector_swap3() );
-*/
+
 		test_cases.push_back( test_case_string_adapter_constructor_1() );
 		test_cases.push_back( test_case_string_adapter_capacity_1() );
 		test_cases.push_back( test_case_string_adapter_max_size_1() );
