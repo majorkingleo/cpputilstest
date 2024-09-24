@@ -57,6 +57,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/tools \
 	-I$(top_srcdir)/cpputils/io \
 	-I$(top_srcdir)/common \
 	-std=gnu++23 \
+	-fstack-protector \
 	-D_GLIBCXX_USE_CXX11_ABI=1 \
 	-D_XOPEN_SOURCE=700 # for cyggwin fileno()
 
@@ -149,9 +150,10 @@ test_wformat_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a 
 	cpputils/io/libcpputilsio.a \
 	cpputils/cpputilsshared/libcpputilsshared.a
 
-test_static_format_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a \
+test_static_format_LDADD = \
 	cpputils/io/libcpputilsio.a \
-	cpputils/cpputilsshared/libcpputilsshared.a
+	cpputils/cpputilsshared/libcpputilsshared.a \
+	cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a
 
 test_cpputilsshared_LDADD = cpputils/cpputilsshared/cpputilsformat/libcpputilsformat.a \
 	cpputils/io/libcpputilsio.a \
