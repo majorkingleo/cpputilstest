@@ -67,6 +67,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert17();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert18();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert19();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert20();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase1();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase2();

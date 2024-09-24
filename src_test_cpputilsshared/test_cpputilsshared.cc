@@ -813,6 +813,8 @@ int main( int argc, char **argv )
 
 		test_cases.push_back( test_case_span_vector_insert19() );
 
+		test_cases.push_back( test_case_span_vector_insert20() );
+
 		test_cases.push_back( test_case_span_vector_erase1() );
 		test_cases.push_back( test_case_span_vector_erase2() );
 		test_cases.push_back( test_case_span_vector_erase3() );

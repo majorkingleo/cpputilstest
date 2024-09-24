@@ -1043,7 +1043,24 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert19()
 			});
 }
 
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_insert20()
+{
+	return std::make_shared<TestInsert<20,int,int>>(__FUNCTION__,
+			[]( auto & v ) {
+				int ret = 0;
+				std::visit(
+						[&ret](auto & e){
+							std::initializer_list<int> il { 1, 2, 3, 4 ,5, 6, 7, 8, 9, 10 };
+							e.assign(il.begin(), il.end());
 
+							std::initializer_list<int> ins { -1, -2, -3, -4 };
+
+							ret = *(e.insert(e.begin(), ins ));
+						}, v );
+
+				return ret;
+			});
+}
 
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase1()
 {
