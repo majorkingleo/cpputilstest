@@ -177,10 +177,8 @@ int main( int argc, char **argv )
 
 
 
-  std::cout << static_format<20> ("%.3s", 1 ) << std::endl;
-  std::cout << static_format<20> ("%.3s", std::string("x") ) << std::endl;
-  std::cout << static_format<20> ("%.3s", "x" ) << std::endl;
-  std::cout << static_format<40>( "P: %d %d%%; ", 1, 2 ) << std::endl;
+  std::cout << static_format<20>( "% 4.0f%%", (float)23.5 ) << std::endl;
+
 
 #if 1
 #if __cpp_exceptions > 0
@@ -228,7 +226,7 @@ int main( int argc, char **argv )
       TEST( (static_format<20>( "%c", (unsigned long)35 )),        sprintf( buffer, "%c", (unsigned long)35 ) );
       TEST( (static_format<20>( "%c", (short)35 )),                sprintf( buffer, "%c", (short)35 ) );
       TEST( (static_format<20>( "%c", (unsigned short)35 )),       sprintf( buffer, "%c", (unsigned short)35 ) );
-
+      TEST( (static_format<20>( "% 4.0f%%", (float)23.5 )),  	   sprintf( buffer, "% 4.0f%%", (float)23.5 ) );
       std::cout << std::endl;
 
 #if __cpp_exceptions > 0

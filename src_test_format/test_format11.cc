@@ -75,6 +75,7 @@ int main( int argc, char **argv )
       TEST( format( "%c", (unsigned long)35 ),        sprintf( buffer, "%c", (unsigned long)35 ) );
       TEST( format( "%c", (short)35 ),                sprintf( buffer, "%c", (short)35 ) );
       TEST( format( "%c", (unsigned short)35 ),       sprintf( buffer, "%c", (unsigned short)35 ) );
+      TEST( format( "% 4.0f%%", (float)23.5 ),  	  sprintf( buffer, "% 4.0f%%", (float)23.5 ) );
 
       std::cout << std::endl;
 
