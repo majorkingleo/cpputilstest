@@ -95,6 +95,8 @@ cpputils_cpputilsshared_libcpputilsshared_a_SOURCES= \
 		cpputils/cpputilsshared/pairs.h \
 		cpputils/cpputilsshared/range.h \
 		cpputils/cpputilsshared/ref.h \
+		cpputils/cpputilsshared/static_debug_exception.h \
+		cpputils/cpputilsshared/static_debug_exception.cc \
 		cpputils/cpputilsshared/stderr_exception.h \
 		cpputils/cpputilsshared/stderr_exception.cc \
 		cpputils/cpputilsshared/string_utils.h \
@@ -122,6 +124,7 @@ cpputils_cpputilsshared_cpputilsformat_libcpputilsformat_a_SOURCES= \
 	cpputils/cpputilsshared/cpputilsformat/format2.h \
 	cpputils/cpputilsshared/cpputilsformat/format1.h \
 	cpputils/cpputilsshared/cpputilsformat/cformat.h \
+	cpputils/cpputilsshared/cpputilsformat/cformat.cc \
 	cpputils/cpputilsshared/cpputilsformat/wformat2.cc \
 	cpputils/cpputilsshared/cpputilsformat/wformat2.h \
 	cpputils/cpputilsshared/cpputilsformat/cwformat.h \
