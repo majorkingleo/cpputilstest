@@ -177,7 +177,7 @@ int main( int argc, char **argv )
 
 
 
-  std::cout << static_format<20>( "% 4.0f%%", (float)23.5 ) << std::endl;
+  std::cout << static_format<100>("\twait:                         % 9d\n", 9 ) << std::endl;
 
 
 #if 1
@@ -227,6 +227,7 @@ int main( int argc, char **argv )
       TEST( (static_format<20>( "%c", (short)35 )),                sprintf( buffer, "%c", (short)35 ) );
       TEST( (static_format<20>( "%c", (unsigned short)35 )),       sprintf( buffer, "%c", (unsigned short)35 ) );
       TEST( (static_format<20>( "% 4.0f%%", (float)23.5 )),  	   sprintf( buffer, "% 4.0f%%", (float)23.5 ) );
+      TEST( (static_format<20>( "% 9d", 51 )), 	  				   sprintf( buffer, "% 9d", 51 ) );
       std::cout << std::endl;
 
 #if __cpp_exceptions > 0
