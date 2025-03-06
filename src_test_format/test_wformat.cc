@@ -88,6 +88,7 @@ int main( int argc, char **argv )
 		TESTW( wformat( L"%c", (short)35 ),                sprintf( buffer, "%c", (short)35 ) );
 		TESTW( wformat( L"%c", (unsigned short)35 ),       sprintf( buffer, "%c", (unsigned short)35 ) );
 		TESTW( wformat( L"Schaß %d", 35 ), 				   sprintf( buffer, "Schaß %d", 35 ) );
+		TESTW( wformat( L"% 10s", "HALLO" ),               sprintf( buffer, "% 10s", "HALLO" ) );
 
 		std::cout << "\n\n";
 
@@ -135,6 +136,7 @@ int main( int argc, char **argv )
 		TEST( format( "%c", (short)35 ),                sprintf( buffer, "%c", (short)35 ) );
 		TEST( format( "%c", (unsigned short)35 ),       sprintf( buffer, "%c", (unsigned short)35 ) );
 		TEST( format( "Schaß %d", 35 ), 				sprintf( buffer, "Schaß %d", 35 ) );
+		TEST( format( "% 10s", "HALLO" ),               sprintf( buffer, "% 10s", "HALLO" ) );
 
 		std::cout << std::endl;
 
