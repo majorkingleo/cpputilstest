@@ -84,6 +84,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_erase9();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back1();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back2();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back3();
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back4();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_pop_back1();
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_pop_back2();

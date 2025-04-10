@@ -1277,6 +1277,26 @@ std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back3()
 }
 
 
+std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_push_back4()
+{
+	return std::make_shared<TestInsert<5,std::string,int>>(__FUNCTION__,
+		[]( auto & v ) {
+			int ret = 0;
+			std::visit(
+					[&ret](auto & e){
+
+						std::initializer_list<std::string> il { "1", "2", "3", "4" };
+						e.assign(il.begin(), il.end());
+
+						e.push_back( std::string("x") );
+
+						ret = e.size();
+					}, v );
+
+			return ret;
+		});
+}
+
 std::shared_ptr<TestCaseBase<bool>> test_case_span_vector_pop_back1()
 {
 	return std::make_shared<TestInsert<20,std::string,int>>(__FUNCTION__,
