@@ -105,7 +105,9 @@ std::shared_ptr<TestCaseBase<bool>> test_case_strip14() {
 	return std::make_shared<TestCaseFuncEqual<std::string>>(__FUNCTION__," \thello hello \n","hello hello",test_strip_equal);
 }
 
-
+std::shared_ptr<TestCaseBase<bool>> test_case_strip15() {
+	return std::make_shared<TestCaseFuncEqual<std::string>>(__FUNCTION__," \thello hello \r\n","hello hello",test_strip_equal);
+}
 
 auto test_strip_view_equal = []( const auto & a, const auto & b) { return strip_view(a) == b; };
 

@@ -35,6 +35,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_strip11();
 std::shared_ptr<TestCaseBase<bool>> test_case_strip12();
 std::shared_ptr<TestCaseBase<bool>> test_case_strip13();
 std::shared_ptr<TestCaseBase<bool>> test_case_strip14();
+std::shared_ptr<TestCaseBase<bool>> test_case_strip15();
 
 std::shared_ptr<TestCaseBase<bool>> test_case_strip_view1();
 std::shared_ptr<TestCaseBase<bool>> test_case_strip_view2();

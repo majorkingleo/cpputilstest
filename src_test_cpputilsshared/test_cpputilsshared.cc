@@ -98,6 +98,7 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_strip12() );
 		test_cases.push_back( test_case_strip13() );
 		test_cases.push_back( test_case_strip14() );
+		test_cases.push_back( test_case_strip15() );
 
 		test_cases.push_back( test_case_strip_view1() );
 		test_cases.push_back( test_case_strip_view2() );
