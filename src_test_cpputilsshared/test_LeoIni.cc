@@ -18,21 +18,18 @@ namespace {
 
 class TestCaseFuncWriteIni : public TestCaseBase<bool>
 {
-	typedef std::function<bool( std::fstream & file )> Func;
+	typedef std::function<bool( const std::string & file )> Func;
 	Func func;
-	std::size_t buffer_size;
 	std::ios_base::openmode openmode;
 	std::string expected_ini_text;
 
 public:
 	TestCaseFuncWriteIni( const std::string & name,
 							Func func_,
-							std::size_t buffer_size_,
 							std::ios_base::openmode openmode_,
 							std::string expected_ini_text_ )
 	: TestCaseBase<bool>( name, true ),
 	  func( func_ ),
-	  buffer_size( buffer_size_ ),
 	  openmode( openmode_ ),
 	  expected_ini_text( expected_ini_text_ )
 	  {}
@@ -43,20 +40,14 @@ public:
 		std::filesystem::remove(file_name);
 
 		{
-			std::fstream file( file_name, openmode );
-
-			if( !file ) {
-				CPPDEBUG( Tools::format( "cannot open file: '%s'", file_name ) );
-				return false;
-			}
-
-			if( !func( file ) ) {
+			if( !func( file_name ) ) {
 				return false;
 			}
 		}
 
 		std::string data;
 		if( !XML::read_file( file_name, data ) ) {
+			CPPDEBUG( Tools::format( "cannot read file '%s'", file_name ) );
 			return false;
 		}
 
@@ -124,6 +115,16 @@ bool read( Leo::Ini & ini, const std::string & section, const std::string & key,
 	return true;
 }
 
+bool write( Leo::Ini & ini, const std::string & section, const std::string & key, const std::string & value )
+{
+	Leo::Ini::Element el( Leo::Ini::Element::TYPE::KEY, section, key, value );
+	if( !ini.write( el ) ) {
+		return false;
+	}
+
+	return true;
+}
+
 } // namespace
 
 std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_1()
@@ -185,15 +186,20 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_1()
 			std::ios_base::in | std::ios_base::out | std::ios_base::trunc );
 }
 
-#if 0
-
 namespace {
 
-bool write_default_ini2( SimpleFlashFs::FileBuffer & file )
+bool write_default_ini2( const std::string & file_name )
 {
-	if( file.write(
-			"[section4 ]\n" \
-			"  key1=nolineend" ) <= 0 ) {
+	std::fstream file( file_name, std::ios_base::out | std::ios_base::trunc );
+
+	if( !file ) {
+		return false;
+	}
+
+	file << "[section4 ]\n" \
+			"  key1=nolineend";
+
+	if( !file ) {
 		return false;
 	}
 
@@ -202,34 +208,42 @@ bool write_default_ini2( SimpleFlashFs::FileBuffer & file )
 
 }
 
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_read_2()
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_2()
 {
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
+	auto test_func = []( const std::string & file_name ) {
 
-		write_default_ini2( file );
+		write_default_ini2( file_name );
 
-		SimpleIni ini( file );
+		Leo::Ini ini( file_name );
 
-		std::string_view value;
+		std::string value;
 
-		if( !ini.read("section4","key1", value ) || value != "nolineend" ) {
+		if( !read( ini, "section4","key1", value ) || value != "nolineend" ) {
 			CPPDEBUG( format( "section4/key1 not found (value:'%s')", value ) );
 			return false;
 		}
 		return true;
 	};
 
-	return std::make_shared<TestCaseFuncOneFileBuffer>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, false );
+	return std::make_shared<TestCaseFuncOneFile>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc );
 }
 
 namespace {
 
-bool write_default_ini3( SimpleFlashFs::FileBuffer & file )
+bool write_default_ini3( const std::string & file_name )
 {
-	if( file.write(
+	std::fstream file( file_name, std::ios_base::out | std::ios_base::trunc );
+
+	if( !file ) {
+		return false;
+	}
+
+	file <<
 			"[section4 ]\n" \
-			"  key1=" ) <= 0 ) {
+			"  key1=";
+
+	if( !file ) {
 		return false;
 	}
 
@@ -239,36 +253,85 @@ bool write_default_ini3( SimpleFlashFs::FileBuffer & file )
 }
 
 
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_read_3()
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_3()
 {
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
+	auto test_func = []( const std::string & file_name ) {
 
-		write_default_ini3( file );
+		write_default_ini3( file_name );
 
-		SimpleIni ini( file );
+		Leo::Ini ini( file_name );
 
-		std::string_view value;
+		std::string value;
 
-		if( !ini.read("section4","key1", value ) || value != "" ) {
+		if( !read( ini, "section4","key1", value ) || value != "" ) {
 			CPPDEBUG( format( "section4/key1 not found (value:'%s')", value ) );
 			return false;
 		}
 		return true;
 	};
 
-	return std::make_shared<TestCaseFuncOneFileBuffer>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, false );
+	return std::make_shared<TestCaseFuncOneFile>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc );
 }
-
 
 
 namespace {
 
-bool write_default_ini4( SimpleFlashFs::FileBuffer & file )
+bool write_default_ini4( const std::string & file_name )
 {
-	if( file.write(
-			"[section4 ]\n" \
-			"  key1 " ) <= 0 ) {
+	std::fstream file( file_name, std::ios_base::out | std::ios_base::trunc );
+
+	if( !file ) {
+		return false;
+	}
+
+	file << 	"[section4 ]\n" \
+			"  key1 ";
+
+	if( !file ) {
+		return false;
+	}
+
+
+	return true;
+}
+
+} // namespace
+
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_4()
+{
+	auto test_func = []( const std::string & file_name ) {
+
+		write_default_ini4( file_name );
+
+		Leo::Ini ini( file_name );
+
+		std::string value;
+
+		if( read( ini, "section4","key1", value ) ) {
+			CPPDEBUG( format( "section4/key1 found (value:'%s')", value ) );
+			return false;
+		}
+		return true;
+	};
+
+	return std::make_shared<TestCaseFuncOneFile>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc );
+}
+
+namespace {
+
+bool write_default_ini5( const std::string & file_name )
+{
+	std::fstream file( file_name, std::ios_base::out | std::ios_base::trunc );
+
+	if( !file ) {
+		return false;
+	}
+
+	file << 	" key1 ";
+
+	if( !file ) {
 		return false;
 	}
 
@@ -277,87 +340,57 @@ bool write_default_ini4( SimpleFlashFs::FileBuffer & file )
 
 } // namespace
 
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_read_4()
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_5()
 {
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
+	auto test_func = []( const std::string & file_name ) {
 
-		write_default_ini4( file );
+		write_default_ini5( file_name );
 
-		SimpleIni ini( file );
+		Leo::Ini ini( file_name );
 
-		std::string_view value;
+		std::string value;
 
-		if( ini.read("section4","key1", value ) ) {
+		if( read( ini, "section4","key1", value ) ) {
 			CPPDEBUG( format( "section4/key1 found (value:'%s')", value ) );
 			return false;
 		}
 		return true;
 	};
 
-	return std::make_shared<TestCaseFuncOneFileBuffer>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, false );
+	return std::make_shared<TestCaseFuncOneFile>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc );
 }
 
-
-
-namespace {
-
-bool write_default_ini5( SimpleFlashFs::FileBuffer & file )
-{
-	if( file.write(
-			" key1 " ) <= 0 ) {
-		return false;
-	}
-
-	return true;
-}
-
-} // namespace
-
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_read_5()
-{
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
-
-		write_default_ini5( file );
-
-		SimpleIni ini( file );
-
-		std::string_view value;
-
-		if( ini.read("section4","key1", value ) ) {
-			CPPDEBUG( format( "section4/key1 found (value:'%s')", value ) );
-			return false;
-		}
-		return true;
-	};
-
-	return std::make_shared<TestCaseFuncOneFileBuffer>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, false );
-}
-
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_1()
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_1()
 {
 	std::string expected_text =
 			"[section1]\n" \
-			"\tkey1 = value1\n";
+			"key1 = value1\n";
 
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
+	auto test_func = []( const std::string & file_name ) {
 
-		SimpleIni ini( file );
+		Leo::Ini ini( file_name, std::ios_base::out | std::ios_base::trunc );
 
-		std::string_view value;
+		if( !ini ) {
+			CPPDEBUG( Tools::format( "cannot open ini file '%s'", file_name ) );
+			return false;
+		}
 
-		if( !ini.write("section1","key1", "value1" ) ) {
+		std::string value;
+
+		if( !write( ini, "section1","key1", "value1" ) ) {
 			CPPDEBUG( "writing failed" );
 			return false;
 		}
+
 		return true;
 	};
 
-	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, false, expected_text );
+	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, expected_text );
 }
 
+#if 0
 
 std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_2()
 {
