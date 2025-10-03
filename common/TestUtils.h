@@ -8,6 +8,7 @@
 
 #include <string>
 #include <functional>
+#include <fstream>
 
 template<class RESULT> class TestCaseBase
 {
@@ -105,6 +106,25 @@ public:
 	bool run() override {
 		return func();
 	}
+};
+
+
+class TestCaseFuncOneFile : public TestCaseBase<bool>
+{
+	typedef std::function<bool( const std::string & file )> Func;
+	Func func;
+	std::ios_base::openmode openmode;
+
+public:
+	TestCaseFuncOneFile( const std::string & name,
+							Func func_,
+							std::ios_base::openmode openmode_)
+	: TestCaseBase<bool>( name, true ),
+	  func( func_ ),
+	  openmode( openmode_ )
+	  {}
+
+	bool run() override;
 };
 
 #endif /* TEST_TESTUTILS_H_ */

@@ -9,6 +9,7 @@
 #include "test_static_string.h"
 #include "test_span_vector.h"
 #include "test_string_adapter.h"
+#include "test_LeoIni.h"
 #include "ColoredOutput.h"
 #include "ColBuilder.h"
 #include <arg.h>
@@ -867,6 +868,8 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_string_adapter_replace_2() );
 		test_cases.push_back( test_case_string_adapter_replace_3() );
 		test_cases.push_back( test_case_string_adapter_replace_4() );
+
+		test_cases.push_back( test_case_leo_ini_read_1() );
 
 		ColBuilder col;
 

@@ -43,6 +43,8 @@ test_cpputilsshared_SOURCES=\
 		src_test_cpputilsshared/test_span_vector.h \
 		src_test_cpputilsshared/test_string_adapter.cc \
 		src_test_cpputilsshared/test_string_adapter.h \
+		src_test_cpputilsshared/test_LeoIni.h \
+		src_test_cpputilsshared/test_LeoIni.cc \
 		tools_config.h
 		
 test_io_SOURCES=\
@@ -137,6 +139,7 @@ cpputils_cpputilsshared_cpputilsformat_libcpputilsformat_a_SOURCES= \
 	
 common_libcommon_a_SOURCES=\
 	common/TestUtils.h \
+	common/TestUtils.cc \
 	common/ColBuilder.h \
 	common/ColBuilder.cc
 
