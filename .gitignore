@@ -103,6 +103,7 @@ CMakeFiles
 cmake_install.cmake
 dist
 mymoc.sh
+.test_case*
 
 test_format*
 test_format11*

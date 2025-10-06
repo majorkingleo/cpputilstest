@@ -390,29 +390,27 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_1()
 				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, expected_text );
 }
 
-#if 0
-
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_2()
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_2()
 {
 	std::string expected_text =
 			"[section1]\n" \
-			"\tkey1 = value1\n" \
+			"key1 = value1\n" \
 			"\n" \
 			"[section2]\n" \
-			"\tkey2 = value2\n";
+			"key2 = value2\n";
 
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
+	auto test_func = []( const std::string & file ) {
 
-		SimpleIni ini( file );
+		Leo::Ini ini( file, std::ios_base::out | std::ios_base::trunc );
 
-		std::string_view value;
+		std::string value;
 
-		if( !ini.write("section1","key1", "value1" ) ) {
+		if( !write( ini, "section1","key1", "value1" ) ) {
 			CPPDEBUG( "writing failed" );
 			return false;
 		}
 
-		if( !ini.write("section2","key2", "value2" ) ) {
+		if( !write( ini, "section2","key2", "value2" ) ) {
 			CPPDEBUG( "writing failed" );
 			return false;
 		}
@@ -420,9 +418,11 @@ std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_2()
 		return true;
 	};
 
-	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, true, expected_text );
+	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, expected_text );
 }
+
+#if 0
 
 
 std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_3()
