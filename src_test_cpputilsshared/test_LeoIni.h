@@ -22,14 +22,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_4();
 std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_5();
 std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_6();
 std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_7();
-std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_8();
-std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_9();
-std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_10();
 
-std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_value_1();
-std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_value_2();
-std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_value_3();
 
-std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_blob_1();
 
 

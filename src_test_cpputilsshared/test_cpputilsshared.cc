@@ -879,6 +879,10 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_leo_ini_write_2() );
 		test_cases.push_back( test_case_leo_ini_write_3() );
 		test_cases.push_back( test_case_leo_ini_write_4() );
+		test_cases.push_back( test_case_leo_ini_write_5() );
+		test_cases.push_back( test_case_leo_ini_write_6() );
+		test_cases.push_back( test_case_leo_ini_write_7() );
+
 
 		ColBuilder col;
 
