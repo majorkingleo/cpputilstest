@@ -495,37 +495,40 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_3()
 				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, expected_text );
 }
 
-#if 0
-
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_4()
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_4()
 {
 	std::string expected_text =
 			"[section1]\n" \
 			"\tkey1 = value1\n" \
-			"\tkey3 = value3\n" \
+			"key3 = value3\n" \
 			"\n" \
 			"[section2]\n" \
 			"\tkey2 = value2\n";
 
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
+	auto test_func = []( const std::string & file_name ) {
 
-		std::string init_text =
-				"[section1]\n" \
-				"\tkey1 = value1\n" \
-				"\n" \
-				"[section2]\n" \
-				"\tkey2 = value2\n";
+		{
+			std::fstream file( file_name, std::ios_base::in | std::ios_base::out | std::ios_base::trunc );
+
+			file << 	"[section1]\n" \
+					"\tkey1 = value1\n" \
+					"\n" \
+					"[section2]\n" \
+					"\tkey2 = value2\n";
 
 
-		if( !file.write( init_text ) ) {
+			if( !file ) {
+				return false;
+			}
+		}
+
+		Leo::Ini ini( file_name );
+
+		if( !ini.read() ) {
 			return false;
 		}
 
-		SimpleIni ini( file );
-
-		std::string_view value;
-
-		if( !ini.write("section1","key3", "value3" ) ) {
+		if( !write( ini, "section1","key3", "value3" ) ) {
 			CPPDEBUG( "writing failed" );
 			return false;
 		}
@@ -533,11 +536,11 @@ std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_4()
 		return true;
 	};
 
-	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, false, expected_text );
+	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, expected_text );
 }
 
-
+#if 0
 
 std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_5()
 {
@@ -545,7 +548,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_5()
 			"[section1]\n" \
 			"\tkey1 = value1\n" \
 			"\"\tcomment 3\n"
-			"\tkey3 = value3\n" \
+			"key3 = value3\n" \
 			"\n" \
 			"[section2]\n" \
 			"\tkey2 = value2\n";
