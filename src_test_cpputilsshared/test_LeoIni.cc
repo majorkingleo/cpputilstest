@@ -422,32 +422,68 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_2()
 				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, expected_text );
 }
 
-#if 0
+namespace {
+bool write_default_ini6( const std::string & file_name )
+{
+	std::fstream file( file_name, std::ios_base::out | std::ios_base::trunc );
+
+	if( !file ) {
+		return false;
+	}
+
+	file <<	"[section1]\n" \
+			";\tcomment1\n"
+			"key1 = value1\n" \
+			"\n" \
+			"[section2]\n" \
+			";\tcomment 2\n"
+			"key2 = value2\n";
+
+	if( !file ) {
+		return false;
+	}
 
 
-std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_3()
+	return true;
+}
+} // namespace
+
+std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_write_3()
 {
 	std::string expected_text =
 			"[section1]\n" \
-			"\"\tcomment1\n"
-			"\tkey1 = value1\n" \
+			";\tcomment1\n"
+			"key1 = value3\n" \
 			"\n" \
 			"[section2]\n" \
-			"\"\tcomment 2\n"
-			"\tkey2 = value2\n";
+			";\tcomment 2\n"
+			"key2 = value4\n";
 
-	auto test_func = []( SimpleFlashFs::FileBuffer & file ) {
+	auto test_func = []( const std::string & file ) {
 
-		SimpleIni ini( file );
+		if( !write_default_ini6( file ) ) {
+			return false;
+		}
 
-		std::string_view value;
+		Leo::Ini ini( file );
 
-		if( !ini.write("section1","key1", "value1", "comment1" ) ) {
+		if( !ini ) {
+			return false;
+		}
+
+		if( !ini.read() ) {
+			return false;
+		}
+
+
+		std::string value;
+
+		if( !write( ini, "section1","key1", "value3" ) ) {
 			CPPDEBUG( "writing failed" );
 			return false;
 		}
 
-		if( !ini.write("section2","key2", "value2", "comment 2" ) ) {
+		if( !write( ini, "section2","key2", "value4" ) ) {
 			CPPDEBUG( "writing failed" );
 			return false;
 		}
@@ -455,9 +491,11 @@ std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_3()
 		return true;
 	};
 
-	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func, 20,
-				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, true, expected_text );
+	return std::make_shared<TestCaseFuncWriteIni>(__FUNCTION__, test_func,
+				std::ios_base::in | std::ios_base::out | std::ios_base::trunc, expected_text );
 }
+
+#if 0
 
 std::shared_ptr<TestCaseBase<bool>> test_case_simple_ini_write_4()
 {
