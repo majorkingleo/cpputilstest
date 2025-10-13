@@ -6,7 +6,7 @@
  */
 #include "test_LeoIni.h"
 #include <CpputilsDebug.h>
-#include "LeoIni.h"
+#include "leoini.h"
 #include <xml.h>
 #include <fstream>
 #include <format.h>
@@ -56,7 +56,7 @@ public:
 			std::string expected_out_file_name = file_name + ".expected.ini";
 			std::ofstream out( expected_out_file_name, std::ios_base::trunc | std::ios_base::out );
 			if( !out ) {
-				CPPDEBUG( format( "cannot open file '%s'", expected_out_file_name ) );
+				CPPDEBUG( Tools::format( "cannot open file '%s'", expected_out_file_name ) );
 				return false;
 			}
 
@@ -139,7 +139,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_1()
 
 
 		if( !read( ini, "section1","key1", value ) || value != "value1" ) {
-			CPPDEBUG( format( "value: %d", value ) );
+			CPPDEBUG( Tools::format( "value: %d", value ) );
 			CPPDEBUG( "section1/key1 not found" );
 			return false;
 		}
@@ -155,12 +155,12 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_1()
 		}
 
 		if( !read( ini, "section2","key1", value ) || value != "value1" ) {
-			CPPDEBUG( format( "section2/key1 not found (value:'%s')", value ) );
+			CPPDEBUG( Tools::format( "section2/key1 not found (value:'%s')", value ) );
 			return false;
 		}
 
 		if( !read( ini, "section2","key2", value ) || value != "value2" ) {
-			CPPDEBUG( format( "section2/key2 not found (value:'%s')", value ) );
+			CPPDEBUG( Tools::format( "section2/key2 not found (value:'%s')", value ) );
 			return false;
 		}
 
@@ -219,7 +219,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_2()
 		std::string value;
 
 		if( !read( ini, "section4","key1", value ) || value != "nolineend" ) {
-			CPPDEBUG( format( "section4/key1 not found (value:'%s')", value ) );
+			CPPDEBUG( Tools::format( "section4/key1 not found (value:'%s')", value ) );
 			return false;
 		}
 		return true;
@@ -264,7 +264,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_3()
 		std::string value;
 
 		if( !read( ini, "section4","key1", value ) || value != "" ) {
-			CPPDEBUG( format( "section4/key1 not found (value:'%s')", value ) );
+			CPPDEBUG( Tools::format( "section4/key1 not found (value:'%s')", value ) );
 			return false;
 		}
 		return true;
@@ -309,7 +309,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_4()
 		std::string value;
 
 		if( read( ini, "section4","key1", value ) ) {
-			CPPDEBUG( format( "section4/key1 found (value:'%s')", value ) );
+			CPPDEBUG( Tools::format( "section4/key1 found (value:'%s')", value ) );
 			return false;
 		}
 		return true;
@@ -351,7 +351,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_leo_ini_read_5()
 		std::string value;
 
 		if( read( ini, "section4","key1", value ) ) {
-			CPPDEBUG( format( "section4/key1 found (value:'%s')", value ) );
+			CPPDEBUG( Tools::format( "section4/key1 found (value:'%s')", value ) );
 			return false;
 		}
 		return true;
