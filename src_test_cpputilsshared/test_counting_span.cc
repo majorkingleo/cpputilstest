@@ -1,6 +1,7 @@
 #include <counting_span.h>
 #include "test_counting_span.h"
 #include <CpputilsDebug.h>
+#include <format.h>
 
 using namespace Tools;
 
@@ -76,7 +77,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_3()
   return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
 
     sub_counting_span<int> sub;
-    name(&sub, "sub");
 
     {
       std::vector<int> v(10);
@@ -88,14 +88,8 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_3()
       auto sub2 = cs1.subspan( 0, v.size() );
 
       {
-        CPPDEBUG( "xxxxxxxxxx create sub3" );
-
-        cs1.print();
-        {
-          [[maybe_unused]]
-          auto sub3 = cs1.subspan( 0, v.size() );
-        }
-        cs1.print();
+        [[maybe_unused]]
+        auto sub3 = cs1.subspan( 0, v.size() );
       }
 
       [[maybe_unused]]
@@ -103,8 +97,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_3()
 
 
       sub = sub1.subspan( 0, 1 );
-
-      cs1.print();
     }
 
     sub[0] = 1; // should throw exception use after free
@@ -120,7 +112,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_4()
   return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
 
     sub_counting_span<int> sub;
-    name(&sub, "sub");
 
     {
       std::vector<int> v(10);
@@ -132,14 +123,10 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_4()
       auto sub2 = sub1.subspan( 1, 6 );
 
       {
-        CPPDEBUG( "xxxxxxxxxx create sub3" );
-
-        cs1.print();
         {
           [[maybe_unused]]
           auto sub3 = sub2.subspan( 1, 4 );
         }
-        cs1.print();
       }
 
       [[maybe_unused]]
@@ -147,8 +134,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_4()
 
 
       sub = sub1.subspan( 0, 1 );
-
-      cs1.print();
     }
 
     sub[0] = 1; // should throw exception use after free
@@ -164,8 +149,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_5()
   return std::make_shared<TestCaseFuncNoInp>(__FUNCTION__, true, []() {
 
     sub_counting_span<int> sub;
-    name(&sub, "sub");
-
 
     std::vector<int> v(10);
     counting_span<int>  cs1( v.data(), v.size() );
@@ -186,8 +169,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_counting_span_subspan_5()
     auto sub4 = cs1.subspan( 0, v.size() );
 
     sub = sub1.subspan( 0, 1 );
-
-    cs1.print();
 
 
     sub[0] = 1; // should throw exception use after free
