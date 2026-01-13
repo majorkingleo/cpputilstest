@@ -887,6 +887,9 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_counting_span_constructor_1() );
 		test_cases.push_back( test_case_counting_span_subspan_1() );
 		test_cases.push_back( test_case_counting_span_subspan_2() );
+		test_cases.push_back( test_case_counting_span_subspan_3() );
+		test_cases.push_back( test_case_counting_span_subspan_4() );
+		test_cases.push_back( test_case_counting_span_subspan_5() );
 
 
 		ColBuilder col;
