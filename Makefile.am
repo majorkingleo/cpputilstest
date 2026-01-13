@@ -45,6 +45,8 @@ test_cpputilsshared_SOURCES=\
 		src_test_cpputilsshared/test_string_adapter.h \
 		src_test_cpputilsshared/test_LeoIni.h \
 		src_test_cpputilsshared/test_LeoIni.cc \
+		src_test_cpputilsshared/test_counting_span.h \
+		src_test_cpputilsshared/test_counting_span.cc \
 		tools_config.h
 		
 test_io_SOURCES=\
@@ -117,7 +119,8 @@ cpputils_cpputilsshared_libcpputilsshared_a_SOURCES= \
 		cpputils/cpputilsshared/static_vector.h \
 		cpputils/cpputilsshared/static_list.h \
 		cpputils/cpputilsshared/static_string.h \
-		cpputils/cpputilsshared/string_adapter.h
+		cpputils/cpputilsshared/string_adapter.h \
+		cpputils/cpputilsshared/counting_span.h
 
 cpputils_cpputilsshared_cpputilsformat_libcpputilsformat_a_SOURCES= \
 	cpputils/cpputilsshared/cpputilsformat/format.h \

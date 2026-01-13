@@ -10,6 +10,7 @@
 #include "test_span_vector.h"
 #include "test_string_adapter.h"
 #include "test_LeoIni.h"
+#include "test_counting_span.h"
 #include "ColoredOutput.h"
 #include "ColBuilder.h"
 #include <arg.h>
@@ -882,6 +883,10 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_leo_ini_write_5() );
 		test_cases.push_back( test_case_leo_ini_write_6() );
 		test_cases.push_back( test_case_leo_ini_write_7() );
+
+		test_cases.push_back( test_case_counting_span_constructor_1() );
+		test_cases.push_back( test_case_counting_span_subspan_1() );
+		test_cases.push_back( test_case_counting_span_subspan_2() );
 
 
 		ColBuilder col;
