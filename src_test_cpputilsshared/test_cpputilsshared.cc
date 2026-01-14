@@ -891,6 +891,42 @@ int main( int argc, char **argv )
 		test_cases.push_back( test_case_counting_span_subspan_4() );
 		test_cases.push_back( test_case_counting_span_subspan_5() );
 
+    {
+      auto tests = test_cases_counting_span_begin();
+      test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+    }
+
+    {
+      auto tests = test_cases_counting_span_end();
+      test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+    }
+
+    test_cases.push_back( test_case_counting_span_front() );
+    test_cases.push_back( test_case_counting_span_back() );
+
+    {
+      auto tests = test_cases_counting_span_op_brackets();
+      test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+    }
+
+    test_cases.push_back( test_case_counting_span_data() );
+
+
+    {
+      auto tests = test_cases_counting_span_size();
+      test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+    }
+
+    {
+      auto tests = test_cases_counting_span_first();
+      test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+    }
+
+    {
+      auto tests = test_cases_counting_span_last();
+      test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+    }
+
 
 		ColBuilder col;
 
