@@ -4,6 +4,8 @@
  */
 #include "string_utils.h"
 #include "test_string_utils.h"
+#include <format.h>
+#include <CpputilsDebug.h>
 
 using namespace Tools;
 
@@ -312,4 +314,132 @@ std::shared_ptr<TestCaseBase<bool>> test_case_is_int5() {
 
 std::shared_ptr<TestCaseBase<bool>> test_case_is_int6() {
 	return std::make_shared<TestCaseFuncBool<std::string>>(__FUNCTION__,"\t\n",false,test_is_int_equal);
+}
+
+namespace {
+
+	template<class t_std_string=std::string>
+	class TestSplitStringBase : public TestCaseBase<bool>
+	{
+	public:
+		struct TestData {
+			t_std_string input;
+			std::vector<t_std_string> expected_output;
+			t_std_string seperator;
+			int max = -1;
+		};
+
+	protected:
+		std::vector<TestData> test_data;		
+
+	public:
+		TestSplitStringBase( const std::string & name, const std::vector<TestData> & test_data_ )
+		: TestCaseBase<bool>( name, true ),
+		  test_data( test_data_ )
+		  {}
+
+	public:
+	};
+
+	template<class t_std_string=std::string>
+	class TestSplitString : public TestSplitStringBase<t_std_string>
+	{	
+	public:
+		using base = TestSplitStringBase<t_std_string>;
+		using TestData = typename base::TestData;
+
+	public:
+		TestSplitString( const std::string & name,
+			const std::vector<TestData> & test_data_ )
+		: TestSplitStringBase<t_std_string>( name, test_data_ )
+		  {}
+
+	public:
+		bool run() override
+		{
+			for( const auto & td : base::test_data ) {
+				auto output = Tools::split_simple( td.input, td.seperator, td.max );
+
+				if( output != td.expected_output ) {
+					CPPDEBUG( Tools::format( "FAILED: '%s' sep: '%s' max: %d ret: %s != %s ",
+							td.input,
+							td.seperator,
+							td.max,
+							IterableToCommaSeparatedString(output),
+							IterableToCommaSeparatedString(td.expected_output) ) );
+					return false;
+				}			
+			}
+
+			return true;
+		}
+	};
+
+	template<class t_std_string=std::wstring>
+	class TestSplitWString : public TestSplitStringBase<t_std_string>
+	{
+	public:
+		using base = TestSplitStringBase<t_std_string>;
+		using TestData = typename base::TestData;		
+
+	public:
+		TestSplitWString( const std::string & name, const std::vector<TestData> & test_data_ )
+		: TestSplitStringBase<t_std_string>( name, test_data_ )
+		  {}
+
+	public:
+		bool run() override
+		{
+			for( const auto & td : base::test_data ) {
+				auto output = split_string( td.input, td.seperator, td.max );
+
+				if( output != td.expected_output ) {					
+					CPPDEBUG( Tools::wformat( L"FAILED: '%s' sep: '%s' max: %d ret: %s != %s ",
+							td.input,
+							td.seperator,
+							td.max,
+							IterableToCommaSeparatedWString(output),
+							IterableToCommaSeparatedWString(td.expected_output) ) );							
+					return false;
+				}			
+			}
+
+			return true;
+		}
+	};	
+} // namespace
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string() {
+
+
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+
+	ret.push_back( std::make_shared<TestSplitString<std::string>>( __FUNCTION__, std::vector<TestSplitString<std::string>::TestData>{
+		{ "a,b,c", { "a", "b", "c" }, "," },
+		{ "a,,c", { "a", "", "c" }, "," },
+		{ ",b,c", { "", "b", "c" }, "," },
+		{ "a,b,", { "a", "b", "" }, "," },
+		{ ",,", { "", "", "" }, "," },
+		{ "", { "" }, "," },
+		{ "abc", { "abc" }, "," },
+		{ "abc", { "abc" }, "," },
+		{ "a,b,c", { "a", "b,c" }, ",", 2 },
+		{ "a,b,c", { "a", "b", "c" }, ",", 10 },
+	} ) );
+
+	ret.push_back( std::make_shared<TestSplitWString<std::wstring>>( __FUNCTION__, std::vector<TestSplitWString<std::wstring>::TestData>{
+		{ L"a,b,c", { L"a", L"b", L"c" }, L"," },
+		{ L"a,,c", { L"a", L"", L"c" }, L"," },
+		{ L",b,c", { L"", L"b", L"c" }, L"," },
+		{ L"a,b,", { L"a", L"b", L"" }, L"," },
+		{ L",,", { L"", L"", L"" }, L"," },
+		{ L"", { L"" }, L"," },
+		{ L"abc", { L"abc" }, L"," },
+		{ L"abc", { L"abc" }, L"," },
+		{ L"a,b,c", { L"a", L"b,c" }, L",", 2 },
+		{ L"a,b,c", { L"a", L"b", L"c" }, L",", 10 },
+	} ) );
+
+	return ret;
 }

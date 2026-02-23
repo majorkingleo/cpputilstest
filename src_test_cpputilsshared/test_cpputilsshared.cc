@@ -927,6 +927,10 @@ int main( int argc, char **argv )
       test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
     }
 
+	{
+		auto tests = test_case_split_string();
+		test_cases.insert( test_cases.end(), tests.begin(), tests.end() );
+	}
 
 		ColBuilder col;
 

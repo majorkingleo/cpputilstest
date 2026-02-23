@@ -9,6 +9,7 @@
 #include <TestUtils.h>
 #include <string_utils.h>
 #include <memory>
+#include <list>
 
 std::shared_ptr<TestCaseBase<bool>> test_case_toupper1();
 std::shared_ptr<TestCaseBase<bool>> test_case_toupper2();
@@ -90,5 +91,7 @@ std::shared_ptr<TestCaseBase<bool>> test_case_is_int3();
 std::shared_ptr<TestCaseBase<bool>> test_case_is_int4();
 std::shared_ptr<TestCaseBase<bool>> test_case_is_int5();
 std::shared_ptr<TestCaseBase<bool>> test_case_is_int6();
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string();
 
 #endif /* SRC_TEST_CPPUSTILSSHARED_TEST_STRING_UTILS_H_ */
