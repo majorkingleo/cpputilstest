@@ -93,5 +93,6 @@ std::shared_ptr<TestCaseBase<bool>> test_case_is_int5();
 std::shared_ptr<TestCaseBase<bool>> test_case_is_int6();
 
 std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string();
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string_view();
 
 #endif /* SRC_TEST_CPPUSTILSSHARED_TEST_STRING_UTILS_H_ */

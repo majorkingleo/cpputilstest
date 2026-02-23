@@ -357,16 +357,60 @@ namespace {
 	public:
 		bool run() override
 		{
+			unsigned int idx = 0;
 			for( const auto & td : base::test_data ) {
-				auto output = Tools::split_simple( td.input, td.seperator, td.max );
+				auto output = Tools::split_string( td.input, td.seperator, td.max );
 
+				unsigned int idx = 0;
 				if( output != td.expected_output ) {
-					CPPDEBUG( Tools::format( "FAILED: '%s' sep: '%s' max: %d ret: %s != %s ",
+					CPPDEBUG( Tools::format( "FAILED[%d]: '%s' sep: '%s' max: %d ret: %s (%d) != %s (%d)",
+							idx,
 							td.input,
 							td.seperator,
 							td.max,
 							IterableToCommaSeparatedString(output),
-							IterableToCommaSeparatedString(td.expected_output) ) );
+							output.size(),
+							IterableToCommaSeparatedString(td.expected_output),
+							td.expected_output.size() ) );
+					return false;
+				}			
+				++idx;
+			}
+
+			return true;
+		}
+	};
+
+		template<class t_std_string=std::string>
+	class TestSplitStringView : public TestSplitStringBase<t_std_string>
+	{	
+	public:
+		using base = TestSplitStringBase<t_std_string>;
+		using TestData = typename base::TestData;
+
+	public:
+		TestSplitStringView( const std::string & name,
+			const std::vector<TestData> & test_data_ )
+		: TestSplitStringBase<t_std_string>( name, test_data_ )
+		  {}
+
+	public:
+		bool run() override
+		{
+			for( const auto & td : base::test_data ) {
+				auto output = Tools::split_string_view( td.input, td.seperator, td.max );
+
+				unsigned int idx = 0;
+				if( output != td.expected_output ) {
+					CPPDEBUG( Tools::format( "FAILED[%d]: '%s' sep: '%s' max: %d ret: %s (%d) != %s (%d)",
+							idx,
+							td.input,
+							td.seperator,
+							td.max,
+							IterableToCommaSeparatedString(output),
+							output.size(),
+							IterableToCommaSeparatedString(td.expected_output),
+							td.expected_output.size() ) );
 					return false;
 				}			
 			}
@@ -407,6 +451,41 @@ namespace {
 			return true;
 		}
 	};	
+
+	template<class t_std_string=std::wstring>
+	class TestSplitWStringView : public TestSplitStringBase<t_std_string>
+	{
+	public:
+		using base = TestSplitStringBase<t_std_string>;
+		using TestData = typename base::TestData;		
+
+	public:
+		TestSplitWStringView( const std::string & name, const std::vector<TestData> & test_data_ )
+		: TestSplitStringBase<t_std_string>( name, test_data_ )
+		  {}
+
+	public:
+		bool run() override
+		{
+			for( const auto & td : base::test_data ) {
+				auto output = Tools::split_string_view( td.input, td.seperator, td.max );
+
+				if( output != td.expected_output ) {					
+					CPPDEBUG( Tools::wformat( L"FAILED: '%s' sep: '%s' max: %d ret: %s (%d) != %s (%d)",
+							td.input,
+							td.seperator,
+							td.max,
+							IterableToCommaSeparatedWString(output),
+							output.size(),
+							IterableToCommaSeparatedWString(td.expected_output),
+							td.expected_output.size() ) );					
+					return false;
+				}			
+			}
+
+			return true;
+		}
+	};		
 } // namespace
 
 std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string() {
@@ -414,8 +493,7 @@ std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string() {
 
 	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
 
-
-	ret.push_back( std::make_shared<TestSplitString<std::string>>( __FUNCTION__, std::vector<TestSplitString<std::string>::TestData>{
+	ret.push_back( std::make_shared<TestSplitString<std::string>>( std::string(__FUNCTION__) + "[0]", std::vector<TestSplitString<std::string>::TestData>{
 		{ "a,b,c", { "a", "b", "c" }, "," },
 		{ "a,,c", { "a", "", "c" }, "," },
 		{ ",b,c", { "", "b", "c" }, "," },
@@ -428,7 +506,41 @@ std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string() {
 		{ "a,b,c", { "a", "b", "c" }, ",", 10 },
 	} ) );
 
-	ret.push_back( std::make_shared<TestSplitWString<std::wstring>>( __FUNCTION__, std::vector<TestSplitWString<std::wstring>::TestData>{
+	ret.push_back( std::make_shared<TestSplitWString<std::wstring>>( std::string(__FUNCTION__) + "[1]", std::vector<TestSplitWString<std::wstring>::TestData>{
+		{ L"a,b,c", { L"a", L"b", L"c" }, L"," },
+		{ L"a,,c", { L"a", L"", L"c" }, L"," },
+		{ L",b,c", { L"", L"b", L"c" }, L"," },
+		{ L"a,b,", { L"a", L"b", L"" }, L"," },
+		{ L",,", { L"", L"", L"" }, L"," },
+		{ L"", { L"" }, L"," },
+		{ L"abc", { L"abc" }, L"," },
+		{ L"abc", { L"abc" }, L"," },
+		{ L"a,b,c", { L"a", L"b,c" }, L",", 2 },
+		{ L"a,b,c", { L"a", L"b", L"c" }, L",", 10 },
+	} ) );
+
+	return ret;
+}
+
+std::list<std::shared_ptr<TestCaseBase<bool>>> test_case_split_string_view() {
+
+
+	std::list<std::shared_ptr<TestCaseBase<bool>>> ret;
+
+	ret.push_back( std::make_shared<TestSplitStringView<std::string_view>>( std::string(__FUNCTION__) + "[0]", std::vector<TestSplitStringView<std::string_view>::TestData>{
+		{ "a,b,c", { "a", "b", "c" }, "," },
+		{ "a,,c", { "a", "", "c" }, "," },
+		{ ",b,c", { "", "b", "c" }, "," },
+		{ "a,b,", { "a", "b", "" }, "," },
+		{ ",,", { "", "", "" }, "," },
+		{ "", { "" }, "," },
+		{ "abc", { "abc" }, "," },
+		{ "abc", { "abc" }, "," },
+		{ "a,b,c", { "a", "b,c" }, ",", 2 },
+		{ "a,b,c", { "a", "b", "c" }, ",", 10 },
+	} ) );
+
+	ret.push_back( std::make_shared<TestSplitWStringView<std::wstring_view>>( std::string(__FUNCTION__) + "[1]", std::vector<TestSplitWStringView<std::wstring_view>::TestData>{
 		{ L"a,b,c", { L"a", L"b", L"c" }, L"," },
 		{ L"a,,c", { L"a", L"", L"c" }, L"," },
 		{ L",b,c", { L"", L"b", L"c" }, L"," },
